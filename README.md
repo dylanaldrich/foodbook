@@ -28,16 +28,18 @@ A user can click on any of their foodbooks from their profile page and be redire
 3. React
 4. Node.js
 5. axios
-6. Edamam recipe search API
+6. Edamam recipe search API (https://developer.edamam.com/)
 
 ### Milestones
-1. Set up frontend server
+1. Set up frontend server and basic templates
 2. Query API, return search results
 3. Set up backend server
 4. Add backend models: user, foodbook, recipe
 5. Link front end and backend
     a. Foodbooks CRUD
     b. Recipes CRUD
+    c. User CRUD
     c. set up relations between them (one to many/many to many)
-6. Styling
-7. Deployment
+6. User auth
+7. Styling
+8. Deployment
