@@ -9,7 +9,6 @@ function App() {
     <div className="App">
       <NavBar />
       <Routes />
-      <h1>Welcome to foodbook</h1>
     </div>
   );
 }

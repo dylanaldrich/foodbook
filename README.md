@@ -43,3 +43,11 @@ A user can click on any of their foodbooks from their profile page and be redire
 6. User auth
 7. Styling
 8. Deployment
+
+
+### Stretch Goals
+1. Add dual functionality to search bar to show results of recipes a user has already saved
+    a. Potentially show already saved recipes at the top of search results? Add styling to recipe cards to indicate if they're already saved?
+2. Add animated navbar expansion to show the search results (navbar expands to 100vh and displays the grid of results as recipe cards)
+3. Recipes index page (to see all)?
+4. Filter feature on foodbook detail page, user can click a recipe type (all (default), entree, dessert, side, etc.) and the page will then only display recipes matching that type from the current foodbook
