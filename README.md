@@ -32,17 +32,20 @@ A user can click on any of their foodbooks from their profile page and be redire
 
 ### Milestones
 1. Set up frontend server and basic templates
-2. Query API, return search results
-3. Set up backend server
-4. Add backend models: user, foodbook, recipe
-5. Link front end and backend
-    a. Foodbooks CRUD
-    b. Recipes CRUD
-    c. User CRUD
-    c. set up relations between them (one to many/many to many)
-6. User auth
-7. Styling
-8. Deployment
+    a. Routes and pages
+2. Set up backend server
+3. Add backend models: user, foodbook, recipe
+    a. set up relations between them (one to many/many to many) on backend
+4. Link front end and backend
+    a. Query API, return search results (set up components)
+    b. Foodbooks CRUD
+    c. Recipes CRUD
+    d. User CRUD
+5. User auth
+    a. JWT tokens
+    b. add authorization gatekeeping
+6. Styling
+7. Deployment
 
 
 ### Stretch Goals
@@ -51,3 +54,4 @@ A user can click on any of their foodbooks from their profile page and be redire
 2. Add animated navbar expansion to show the search results (navbar expands to 100vh and displays the grid of results as recipe cards)
 3. Recipes index page (to see all)?
 4. Filter feature on foodbook detail page, user can click a recipe type (all (default), entree, dessert, side, etc.) and the page will then only display recipes matching that type from the current foodbook
+5. Pagination for search results/saved recipes

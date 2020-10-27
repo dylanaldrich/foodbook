@@ -10,11 +10,12 @@ const NavBar = (props) => {
                 <span className='navbar-toggler-icon'></span>
                 </button>
                 <div className='collapse navbar-collapse' id='navbarCollapse'>
+                    {/* Search container component will go here */}
                     <form className='form-inline mt-2 mt-md-0'>
                         <input className='form-control mr-sm-2' type='text' placeholder='Search' aria-label='Search' />
                         <button className='btn btn-outline-success my-2 my-sm-0' type='submit'>Search</button>
                     </form>
-                    <ul className='navbar-nav mr-auto'>
+                    <ul className='navbar-nav ml-auto'>
                         <li className='nav-item active'>
                         <NavLink className='nav-link' to='/about'>About<span className='sr-only'>(current)</span></NavLink>
                         </li>
@@ -26,7 +27,6 @@ const NavBar = (props) => {
                         <NavLink className='nav-link disabled' to='#'>Sign Up</NavLink>
                         </li>
                     </ul>
-                    
                 </div>
             </nav>
         </header>

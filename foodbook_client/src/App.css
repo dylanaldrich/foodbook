@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap');
+
 .App {
   text-align: center;
+  font-family: 'Libre Baskerville', serif;
 }
 
 .App-logo {
@@ -35,4 +38,20 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+hr {
+  background-color: black;
+  height: 3px;
+  margin-top: 6px;
+  border-radius: 10px;
+}
+
+.jumpbotron {
+  margin: 0 auto;
+  padding: 65px 0 0 0;
+}
+
+h1 {
+  margin-bottom: 0;
 }
