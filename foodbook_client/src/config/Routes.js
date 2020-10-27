@@ -3,7 +3,7 @@ import {Switch, Route} from 'react-router-dom';
 import Home from '../pages/Home';
 // import About from '../pages/About';
 // import RecipeDetail from '../pages/RecipeDetail';
-// import Profile from '../pages/Profile';
+import Profile from '../pages/Profile';
 // import FoodbookDetail from '..pages/FoodbookDetail'
 
 // import { useRecoilValue } from "recoil";
@@ -19,8 +19,8 @@ const Routes = (props) => {
             {/* Auth Required Routes */}
             {/* {loggedIn && (
                 <Switch> */}
-                    {/* <Route path='/profile/:id' component={Profile} />
-                    <Route path='/foodbook/:id' component={FoodbookDetail} /> */}
+                    <Route path='/profile/:id' component={Profile} />
+                    {/* <Route path='/foodbook/:id' component={FoodbookDetail} /> */}
                 {/* </Switch>
              )} */}
             {/* <Route path='*' component={NotFound} /> */}

@@ -29,6 +29,7 @@ A user can click on any of their foodbooks from their profile page and be redire
 4. Node.js
 5. axios
 6. Edamam recipe search API (https://developer.edamam.com/)
+7. Recoil
 
 ### Milestones
 1. Set up frontend server and basic templates
