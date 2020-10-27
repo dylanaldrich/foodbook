@@ -28,7 +28,7 @@ const Home = (props) => {
                     </div>
                     <div class='col-md-8 text-left'>
                         <h2 class='featurette-heading'>Step 2: Do you want to save a recipe and try it out?</h2>
-                        <p class='lead'>Register for an account, and then add it to one of your foodbooks!</p>
+                        <p class='lead'>Sign up for an account, and then add it to one of your foodbooks!</p>
                     </div>
                 </div>
                 <div class='row featurette align-items-center'>
