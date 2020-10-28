@@ -56,3 +56,4 @@ A user can click on any of their foodbooks from their profile page and be redire
 3. Recipes index page (to see all)?
 4. Filter feature on foodbook detail page, user can click a recipe type (all (default), entree, dessert, side, etc.) and the page will then only display recipes matching that type from the current foodbook
 5. Pagination for search results/saved recipes
+6. Attach an ADD button directly to search results cards so user can add it to their foodbook(s) without navigating to the recipe show page

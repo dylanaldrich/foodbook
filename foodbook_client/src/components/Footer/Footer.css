@@ -3,3 +3,8 @@
     text-align: left;
     padding: 5px;
 }
+
+footer {
+    position: absolute;
+    bottom: 0;
+}
