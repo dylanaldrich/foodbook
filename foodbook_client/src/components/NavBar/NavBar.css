@@ -1,4 +1,25 @@
-.navbar-brand {
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    color: white;
+    height: 30px;
+    transition: 0.5s linear;
+    padding: 10px;
+}
+
+.navbar__titles {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     font-size: 33px;
     line-height: 1;
+}
+
+.navbar-active {
+    height: 100vh;
 }
