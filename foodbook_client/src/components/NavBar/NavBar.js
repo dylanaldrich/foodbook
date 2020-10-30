@@ -1,9 +1,20 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 
+import ModalContainer from '../Modal/ModalContainer';
+
 import './NavBar.css';
 
 const NavBar = (props) => {
+    const signUpText = "Sign Up";
+    const LoginText = "Login";
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+        console.log(event.target.name.value);
+        console.log(event.target.email.value);
+    };
+    
     return (
         <header>
             <nav class='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
@@ -22,11 +33,13 @@ const NavBar = (props) => {
                         <NavLink className='nav-link' to='/about'>About<span className='sr-only'>(current)</span></NavLink>
                         </li>
                         {/* TODO once user auth is set up, add conditional logic here to display Profile and Logout links */}
+                        {/* Here is where the modal containers will go */}
                         <li className='nav-item'>
-                        <NavLink className='nav-link' to='#'>Login</NavLink>
+                            {/* <NavLink className='nav-link' to='#'>Login</NavLink> */}
                         </li>
                         <li className='nav-item'>
-                        <NavLink className='nav-link disabled' to='#'>Sign Up</NavLink>
+                            <ModalContainer triggerText={signUpText} onSubmit={onSubmit} />
+                        {/* <NavLink className='nav-link disabled' to='#'>Sign Up</NavLink> */}
                         </li>
                     </ul>
                 </div>
