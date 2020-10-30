@@ -6,14 +6,6 @@ import ModalContainer from '../Modal/ModalContainer';
 import './NavBar.css';
 
 const NavBar = (props) => {
-    const signUpText = "Sign Up";
-    const LoginText = "Login";
-
-    const onSubmit = (event) => {
-        event.preventDefault();
-        console.log(event.target.name.value);
-        console.log(event.target.email.value);
-    };
     
     return (
         <header>
@@ -35,11 +27,10 @@ const NavBar = (props) => {
                         {/* TODO once user auth is set up, add conditional logic here to display Profile and Logout links */}
                         {/* Here is where the modal containers will go */}
                         <li className='nav-item'>
-                            {/* <NavLink className='nav-link' to='#'>Login</NavLink> */}
+                            <ModalContainer triggerText={"Login"} />
                         </li>
                         <li className='nav-item'>
-                            <ModalContainer triggerText={signUpText} onSubmit={onSubmit} />
-                        {/* <NavLink className='nav-link disabled' to='#'>Sign Up</NavLink> */}
+                            <ModalContainer triggerText={"Sign Up"} />
                         </li>
                     </ul>
                 </div>
