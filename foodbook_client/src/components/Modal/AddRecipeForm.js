@@ -1,16 +1,23 @@
 import React, {useState} from 'react';
-import AuthModel from '../../models/AuthModel';
+import RecipeModel from '../../models/RecipeModel';
 
-export const AddRecipeForm = ({closeModal}) => {
-    const [name, setName] = useState("");
+export const AddRecipeForm = ({closeModal}) => {    
+    const [recipe_type, setRecipeType] = useState("");
+    const [selectedFoodbooks, setSelectedFoodbooks] = useState("");
     const [error, setError] = useState('');
+
+    function setSelectedFoodbooks(event) {
+        const addsFoodbook = selectedFoodbooks.concat([event.target.value]);
+        selectedFoodbooks = addsFoodbook;
+    };
+
 
     function handleSubmit(event) {
         event.preventDefault();
-        AuthModel.login({name, password}).then((response) => {
-        console.log("Create response:", response);
-        if(response.status === 201) { // status code 201 means OK, successful
-            console.log("foodbook created successfully");
+        RecipeModel.create({recipe_type, selectedFoodbooks}).then((response) => {
+        console.log("Create recipe response:", response);
+        if(response.status === 201) {
+            console.log("Recipe created successfully");
             closeModal();
         } else {
             setError(response.message);
@@ -22,15 +29,20 @@ export const AddRecipeForm = ({closeModal}) => {
         <form onSubmit={handleSubmit}>
             {error && <p style={{ color: "red" }}>{error}</p>} 
             <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="name"
-                    name='name'
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                />
+                <label>
+                    Recipe type
+                    <select /* value={recipe_type} */ name={recipe_type} onChange={setRecipeType}>
+                        <option value="entree">Entrée</option>
+                        <option value="appetizer">Appetizer/Snack</option>
+                        <option value="side">Side dish</option>
+                        <option value="salad">Salad</option>
+                        <option value="dessert">Dessert</option>
+                        <option value="drink">Drink</option>
+                    </select>
+                </label>
+            </div>
+            <div className="form-group">
+                {/* Here is where the list of foodbooks and checkboxes will go */}
             </div>
             <div className="form-group">
                 <button className="form-control btn btn-primary" type="submit">
