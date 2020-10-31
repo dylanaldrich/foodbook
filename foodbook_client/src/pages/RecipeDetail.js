@@ -5,18 +5,26 @@ import SearchModel from '../models/SearchModel';
 import '../App.css';
 
 const RecipeDetail = (props) => {
+    console.log("gets here");
     const [recipe, setRecipe] = useState({});
     const [error, setError] = useState('');
     
+    console.log("props: ", props);
 
-    useEffect(
-        function () {
-            findRecipe(props.match.params.id);
+    useEffect(function(){
+            if(props.match.params.id) {
+                console.log("Get to usefffect");
+                const edamam_id = props.match.params.id;
+                findRecipe(edamam_id);
+            }
         },
         [props.match.params.id]
     );
 
+    console.log("gets down here");
+
     function findRecipe (recipe_id) {
+        console.log("gets into find recipe");
         SearchModel.findRecipe(recipe_id)
         .then((response) => {
             const foundRecipe = response.searchResults.hits[0].recipe;
@@ -43,19 +51,24 @@ const RecipeDetail = (props) => {
         return Math.floor(total / recipe.yield);
     }
 
+    console.log("recipe", recipe);
+
     return (
         <>
+        {recipe.image ? 
+            <>
             {/* Banner */}
             {error && <p style={{ color: "red" }}>{error}</p>}
-            <div className="container text-white rounded bg-dark top-banner">
-            {/* <img className="card-img-left flex-auto d-none d-md-block"  alt= src=  style="width: 200px; height: 250px;"/> */}
-            {/* <img src={recipe.image} alt={recipe.label} /> */}
+            <div className="container d-flex text-white rounded bg-dark top-banner">
+                <img className="card-img-left flex-auto d-none d-md-block"  src={recipe.image} alt={recipe.label} />
                 <div className="col-md-6 px-0 d-flex">
                     <h1 className="display-4">{recipe.label}</h1>
                 </div>
                 <ModalContainer triggerText={"Save Recipe"} />
             </div>
-            {/* Here is where the table will go with the information about the recipe */}
+            {/* Banner End */}
+
+            {/* At a Glance Table */}
             <div className="container d-flex">
                 <table class="table col-4 table-striped border border-dark">
                     <thead className="thead-dark">
@@ -87,7 +100,7 @@ const RecipeDetail = (props) => {
                         </tr>
                         <tr>
                             <th scope="row">Protein</th>
-                            <td>{perServing(recipe.totalNutrients.PROCNT.quantity)}g</td>
+                            <td>{perServing(recipe.totalNutrients.PROCNT.quantity)}g</td> 
                         </tr>
                         <tr>
                             <th scope="row">Fat</th>
@@ -114,6 +127,8 @@ const RecipeDetail = (props) => {
                     </ul>
                 </div>
             </div>
+            </>
+            : <p>Loading...</p> }
         </>
     );
 };
