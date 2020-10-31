@@ -73,10 +73,6 @@ const NavBar = (props) => {
                             placeholder='Search' 
                             aria-label='Search'
                             onFocus={(e) => setActive(true)}
-                            // onBlur={(e) => {
-                                // setActive(false);
-                                // setResults([]);
-                            // }}
                             onChange={(e) => setQuery(e.target.value)}
                         />
                     </form>
@@ -84,12 +80,10 @@ const NavBar = (props) => {
                         <li className='nav-item active'>
                         <NavLink className='nav-link' to='/about'>About<span className='sr-only'>(current)</span></NavLink>
                         </li>
-                        {/* TODO once user auth is set up, add conditional logic here to display Profile and Logout links */}
-                        {/* Here is where the modal containers will go */}
                         {user ? (
                             <>
                                 <li className='nav-item active'>
-                                    <NavLink className='nav-link' to={`/user/${user._id}`}>My Profile</NavLink>
+                                    <NavLink className='nav-link' to={`/profile/${user._id}`}>My Profile</NavLink>
                                 </li>
                                 <li className='nav-item active nav-link' onClick={logout}>
                                     Logout

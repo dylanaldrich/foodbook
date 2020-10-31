@@ -6,6 +6,7 @@ import FocusTrap from 'focus-trap-react';
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
 import AddRecipeForm from './AddRecipeForm';
+import EditUserForm from './EditUserForm';
 
 export const Modal = ({
     onClickOutside,
@@ -23,6 +24,8 @@ export const Modal = ({
             return (<LoginForm closeModal={closeModal} />);
         } else if (triggerText === "Save Recipe") {
             return (<AddRecipeForm closeModal={closeModal} />);
+        } else if (triggerText === "Edit Profile") {
+            return (<EditUserForm closeModal={closeModal} />);
         }
     };
 

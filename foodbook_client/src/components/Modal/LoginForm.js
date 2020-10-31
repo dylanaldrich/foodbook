@@ -22,7 +22,7 @@ export const LoginForm = ({closeModal}) => {
             localStorage.setItem('uid', response.signedJwt);
             UserModel.show().then((response) => {
                 setUser(response.data);
-                history.push(`/user/${response.data._id}`);
+                history.push(`/profile/${response.data._id}`);
             });
             closeModal();
         } else {
