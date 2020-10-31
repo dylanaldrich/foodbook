@@ -6,7 +6,10 @@ class SearchModel {
         return fetch(`${URL}/${query}`).then(response => response.json());
     };
 
-    // find one?
+    // find one
+    static findRecipe = (edamam_id) => {
+        return fetch(`${URL}/${edamam_id}`).then(response => response.json());
+    };
 };
 
 export default SearchModel;

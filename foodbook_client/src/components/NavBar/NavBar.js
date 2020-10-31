@@ -1,18 +1,33 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {NavLink} from 'react-router-dom';
 
 import ModalContainer from '../Modal/ModalContainer';
 import SearchModel from '../../models/SearchModel';
+import ResultCard from '../Results/ResultCard';
 
 import './NavBar.css';
 
 const NavBar = (props) => {
     const [active, setActive] = useState(false);
     const [results, setResults] = useState([]);
+    const [query, setQuery]= useState("");
 
-    async function handleChange (event) {
-        const foundRecipes = await SearchModel.searchRecipes(event.target.value)
+    useEffect(
+        function () {
+            if(!query) {
+                setResults([]);
+            }
+            console.log("query", query);
+            fetchRecipes(query);
+        },
+        [query]
+    );
+    
+    function fetchRecipes (query) {
+        console.log("query when search begins", query);
+        SearchModel.searchRecipes(query)
             .then((response) => {
+                console.log("response after aPI hit:", response);
                 setResults(response.searchResults.hits);
             })
             .catch((error) => {
@@ -21,8 +36,12 @@ const NavBar = (props) => {
             });
     };
 
+    function getId (string) {
+        return string.split("recipe_")[1];
+    }
+
     return (
-        <div className={`navbar ${active ? "navbar-active" : ""}`}>
+        <div className={`navbar ${active ? "navbar-active overflow-auto" : ""}`}>
             <nav class='navbar navbar-expand-md navbar-dark fixed-top bg-dark navbar__titles'>
                 <NavLink className='navbar-brand' to='/'>foodbook</NavLink>
                 <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarCollapse' aria-controls='navbarCollapse' aria-expanded='false' aria-label='Toggle navigation'>
@@ -36,11 +55,11 @@ const NavBar = (props) => {
                             placeholder='Search' 
                             aria-label='Search'
                             onFocus={(e) => setActive(true)}
-                            onBlur={(e) => {
-                                setActive(false);
-                                setResults([]);
-                            }}
-                            onChange={handleChange}
+                            // onBlur={(e) => {
+                                // setActive(false);
+                                // setResults([]);
+                            // }}
+                            onChange={(e) => setQuery(e.target.value)}
                         />
                     </form>
                     <ul className='navbar-nav ml-auto'>
@@ -58,9 +77,13 @@ const NavBar = (props) => {
                     </ul>
                 </div>
             </nav>
-            <div className="navbar__item-list">
-                {results ? results.map((result) => <h1>{/* {result.name} */}Result</h1>) : null}
+            <div className="d-flex flex-wrap justify-content-around overflow-auto">
+                {results ? results.map((result) => <ResultCard setActive={setActive} setResults={setResults} title={result.recipe.label} source={result.recipe.source} imageUrl={result.recipe.image} key={getId(result.recipe.uri)} edamam_id={getId(result.recipe.uri)} />) : null}
             </div>
+            {active ? (<button onClick={(e) => {
+                setActive(false);
+                setResults([]);
+            }} className="btn btn-lg btn-danger center" id="close-search">Close Search</button>) : null}
         </div>
     );
 };

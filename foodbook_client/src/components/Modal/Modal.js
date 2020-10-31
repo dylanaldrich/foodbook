@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import FocusTrap from 'focus-trap-react';
+
+/* Forms */
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
-import FocusTrap from 'focus-trap-react';
+import AddRecipeForm from './AddRecipeForm';
 
 export const Modal = ({
     onClickOutside,
@@ -16,8 +19,10 @@ export const Modal = ({
     function setForm (triggerText) {
         if (triggerText === 'Sign Up') {
             return (<RegisterForm closeModal={closeModal} />);
-        } else /* if (triggerText === 'Login')  */{
+        } else if (triggerText === 'Login') {
             return (<LoginForm closeModal={closeModal} />);
+        } else if (triggerText === "Save Recipe") {
+            return (<AddRecipeForm closeModal={closeModal} />);
         }
     };
 

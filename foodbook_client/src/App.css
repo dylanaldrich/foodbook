@@ -143,3 +143,10 @@ h1 {
   overflow: hidden;
   margin-right: 17px;
 }
+svg, rect {
+  z-index: 0;
+}
+
+/* table {
+  border: 2px solid black;
+} */
