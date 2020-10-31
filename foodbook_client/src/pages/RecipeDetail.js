@@ -5,15 +5,11 @@ import SearchModel from '../models/SearchModel';
 import '../App.css';
 
 const RecipeDetail = (props) => {
-    console.log("gets here");
     const [recipe, setRecipe] = useState({});
     const [error, setError] = useState('');
-    
-    console.log("props: ", props);
 
     useEffect(function(){
             if(props.match.params.id) {
-                console.log("Get to usefffect");
                 const edamam_id = props.match.params.id;
                 findRecipe(edamam_id);
             }
@@ -21,14 +17,10 @@ const RecipeDetail = (props) => {
         [props.match.params.id]
     );
 
-    console.log("gets down here");
-
     function findRecipe (recipe_id) {
-        console.log("gets into find recipe");
         SearchModel.findRecipe(recipe_id)
         .then((response) => {
             const foundRecipe = response.searchResults.hits[0].recipe;
-            console.log("Found Recipe: ", foundRecipe);
             setRecipe(foundRecipe);
         })
         .catch((error) => {
@@ -51,8 +43,6 @@ const RecipeDetail = (props) => {
         return Math.floor(total / recipe.yield);
     }
 
-    console.log("recipe", recipe);
-
     return (
         <>
         {recipe.image ? 
@@ -74,7 +64,7 @@ const RecipeDetail = (props) => {
                 <table class="table col-4 table-striped border border-dark">
                     <thead className="thead-dark">
                         <tr>
-                            <th scope="col mx-auto text-center" colspan="2">At a Glance</th>
+                            <th scope="col mx-auto text-center" colSpan="2">At a Glance</th>
                         </tr>
                     </thead>
                     <tbody>
