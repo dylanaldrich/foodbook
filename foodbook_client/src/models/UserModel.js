@@ -2,30 +2,20 @@ const URL = "http://localhost:3001/user";
 
 class UserModel {
     // show
-    static show = (userId) => {
-        return fetch(`${URL}/${userId}`).then(response => response.json());
-    };
-
-
-    // create
-    static create = (userData) => {
+    static show = () => {
         return fetch(URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(userData)
-        })
-        .then(response => response.json());
+            method: "GET",
+            headers: {authorization: `Bearer ${localStorage.uid}`},
+        }).then((response) => response.json());
     };
-
 
     // update
-    static update = (userId, userData) => {
-        return fetch(`${URL}/${userId}`, {
+    static update = (userData) => {
+        return fetch(URL, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.uid}`,
             },
             body: JSON.stringify(userData)
         })
@@ -34,11 +24,12 @@ class UserModel {
 
 
     // delete
-    static delete = (userId) => {
-        return fetch(`${URL}/${userId}`, {
+    static delete = () => {
+        return fetch(URL, {
             method: "DELETE",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.uid}`,
             }
         })
         .then(response => response.json());

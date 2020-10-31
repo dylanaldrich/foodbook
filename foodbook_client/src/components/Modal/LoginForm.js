@@ -1,17 +1,30 @@
 import React, {useState} from 'react';
+import { useSetRecoilState } from "recoil";
+import { userState } from "../../recoil/atoms";
+
 import AuthModel from '../../models/AuthModel';
+import UserModel from '../../models/UserModel';
+
 
 export const LoginForm = ({closeModal}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState('');
+    const setUser = useSetRecoilState(userState);
 
     function handleSubmit(event) {
         event.preventDefault();
+
         AuthModel.login({email, password}).then((response) => {
-        console.log("Register response:", response);
-        if(response.status === 201) { // status code 201 means OK, successful
-            console.log("Login success");
+        if(response.status === 200) {
+            localStorage.setItem('uid', response.signedJwt);
+            UserModel.show().then((response) => {
+                console.log("response: ", response);
+                console.log("response.data: ", response.data);
+                setUser(response.data);
+                // TODO need to find a way to pass down the routing props to this child component
+                props.history.push(`/user/${response.data._id}`)
+            });
             closeModal();
         } else {
             setError(response.message);

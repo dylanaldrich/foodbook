@@ -64,6 +64,7 @@ const RecipeDetail = (props) => {
                 <div className="col-md-6 px-0 d-flex">
                     <h1 className="display-4">{recipe.label}</h1>
                 </div>
+                {/* TODO write a ternary to determine if the recipe has been saved into a user's foodbook(s), and if so, display an edit button, or if not, display the ADD button (and on search results also, as a stretch goal) */}
                 <ModalContainer triggerText={"Save Recipe"} />
             </div>
             {/* Banner End */}
