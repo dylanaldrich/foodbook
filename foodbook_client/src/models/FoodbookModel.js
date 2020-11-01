@@ -6,6 +6,11 @@ class FoodbookModel {
         return fetch(`${URL}/${foodbookId}`).then(response => response.json());
     };
 
+    // index 
+    static index = (userId) => {
+        return fetch(`${URL}/index/${userId}`).then(response => response.text()).then(text => console.log("response from foodbook index route", text));
+    };
+
 
     // create
     static create = (foodbookData) => {

@@ -6,6 +6,7 @@ import ModalContainer from '../components/Modal/ModalContainer';
 import FoodbooksContainer from '../components/Foodbooks/FoodbooksContainer';
 // import Link from 'react-router-dom';
 import UserModel from '../models/UserModel';
+import FoodbookModel from '../models/FoodbookModel';
 import { userState } from "../recoil/atoms";
 
 import '../App.css';
@@ -13,6 +14,7 @@ import '../App.css';
 const Profile = (props) => {
     const [user, setUser] = useRecoilState(userState);
     const [error, setError] = useState('');
+    const [foodbooks, setFoodbooks] = useState([]);
 
     useEffect(function(){
             if(props.match.params.id) {
@@ -26,15 +28,26 @@ const Profile = (props) => {
     function findUser (userId) {
         UserModel.show(userId)
         .then((response) => {
-            console.log("response.foodbooks from user show route: ", response.foodbooks);
             setUser(response.data);
+            setFoodbooks(response.foodbooks);
         })
         .catch((error) => {
             setError(error.message);
         });
     };
 
-    console.log('user', user);
+    // function findFoodbooks (userId) {
+    //     FoodbookModel.index(userId)
+    //     .then((response) => {
+    //         console.log("response from foodbooks index route: ", response);
+    //         // setFoodbooks(response.data);
+    //     })
+    //     .catch((error) => {
+    //         setError(error.message);
+    //     });
+    // }
+
+    console.log('foodbooks: ', foodbooks);
 
     if (error) return (
         <div className="container text-white rounded bg-dark top-banner">
@@ -46,7 +59,6 @@ const Profile = (props) => {
 
     return (
         <>
-        {console.log("hits return")}
             {user ? 
                 <>
                     {/* Banner */}
@@ -62,13 +74,13 @@ const Profile = (props) => {
                         <hr />
                     </div>
                     <div className="container">
-                       {/*  {user.foodbooks.length ?
+                        {user.foodbooks.length ?
                         <>
-                            <FoodbooksContainer foodbooks={user.foodbooks} />
+                            <p>Foodbooks go here</p>
+                            <FoodbooksContainer foodbooks={foodbooks} />
                         </>
-                        : <p>You haven't created any foodbooks yet!</p> } */}
+                        : <p>You haven't created any foodbooks yet!</p> }
                     </div>
-                    {/* Foodbooks container will go here */}
                 </> 
             : <p>Loading...</p>} 
         </>
