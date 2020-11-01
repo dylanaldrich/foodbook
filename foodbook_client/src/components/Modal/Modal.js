@@ -6,6 +6,7 @@ import FocusTrap from 'focus-trap-react';
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
 import AddRecipeForm from './AddRecipeForm';
+import AddFoodbookForm from './AddFoodbookForm';
 import EditUserForm from './EditUserForm';
 
 export const Modal = ({
@@ -26,7 +27,9 @@ export const Modal = ({
             return (<AddRecipeForm closeModal={closeModal} />);
         } else if (triggerText === "Edit Profile") {
             return (<EditUserForm closeModal={closeModal} />);
-        }
+        } else if (triggerText === "Create a foodbook") {
+            return (<AddFoodbookForm closeModal={closeModal} />);
+        } 
     };
 
     return ReactDOM.createPortal(

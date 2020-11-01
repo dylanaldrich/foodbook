@@ -1,4 +1,4 @@
-const URL = "http://localhost:3001/recipes";
+const URL = "http://localhost:3001/recipe";
 
 class RecipeModel {
     // show
@@ -13,7 +13,8 @@ class RecipeModel {
         return fetch(URL, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.uid}`,
             },
             body: JSON.stringify(recipeData)
         })
@@ -26,7 +27,8 @@ class RecipeModel {
         return fetch(`${URL}/${recipeId}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.uid}`,
             },
             body: JSON.stringify(recipeData)
         })
@@ -39,7 +41,8 @@ class RecipeModel {
         return fetch(`${URL}/${recipeId}`, {
             method: "DELETE",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.uid}`,
             }
         })
         .then(response => response.json());
@@ -47,10 +50,12 @@ class RecipeModel {
 
     // remove
     static remove = (recipeId, foodbookId) => {
+        console.log(recipeId, foodbookId);
         return fetch(`${URL}/${recipeId}/${foodbookId}`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.uid}`,
             }
         })
         .then(response => response.json());

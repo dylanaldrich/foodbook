@@ -36,19 +36,6 @@ const Profile = (props) => {
         });
     };
 
-    // function findFoodbooks (userId) {
-    //     FoodbookModel.index(userId)
-    //     .then((response) => {
-    //         console.log("response from foodbooks index route: ", response);
-    //         // setFoodbooks(response.data);
-    //     })
-    //     .catch((error) => {
-    //         setError(error.message);
-    //     });
-    // }
-
-    console.log('foodbooks: ', foodbooks);
-
     if (error) return (
         <div className="container text-white rounded bg-dark top-banner">
             <div className="col-md-6 px-0 d-flex">
@@ -70,15 +57,12 @@ const Profile = (props) => {
                         <ModalContainer triggerText={"Edit Profile"} />
                     </div>
                     <div className="page-header container">
-                        <h2 className="text-left pt-2 font-weight-bold">My foodbooks <button className=''><i className="fas fa-plus-circle d-inline-block"></i></button></h2>
+                        <h2 className="text-left pt-2 font-weight-bold">My foodbooks <ModalContainer triggerText={"Create a foodbook"} /></h2>
                         <hr />
                     </div>
                     <div className="container">
                         {user.foodbooks.length ?
-                        <>
-                            <p>Foodbooks go here</p>
-                            <FoodbooksContainer foodbooks={foodbooks} />
-                        </>
+                        <FoodbooksContainer foodbooks={foodbooks} />
                         : <p>You haven't created any foodbooks yet!</p> }
                     </div>
                 </> 

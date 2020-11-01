@@ -1,42 +1,39 @@
-import React, {useState} from 'react';
-import {NavLink} from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 
-import FoodbookModel from '../../models/FoodbookModel';
+import RecipeModel from '../../models/RecipeModel';
 
 const FoodbookCard = ({foodbook}) => {
-    const [recipes, setRecipes] = useState([]);
-    const [error, setError] = useState('');
-    console.log("hits foodbook card");
-    console.log("foodbook for the card:", foodbook);
+    const [,setState] = useState();
+    useEffect(() => {
+        console.log("Foodbook after change:", foodbook);
+        setState({});
+    }, [foodbook]);
+    // TODO figure out how to make the foodbook card rerender when a recipe is removed
     
-    function populateRecipes () {
-        FoodbookModel.show(foodbook._id)
-            .then((response) => {
-                console.log("response.recipes from user show route: ", response.recipes);
-                // setRecipes(response.recipes);
-            })
-            .catch((error) => {
-                setError(error.message);
-            });
-    }
+    function handleRecipeRemove(recipeId) {
+        RecipeModel.remove(recipeId, foodbook._id)
+            .catch((error) => console.log("recipe remove error", error));
+    }; 
     
     return(
         <>
-        {console.log("hits card return")}
         <div className="card" style={{width: "18rem"}}>
             <div className="card-body">
-                <h5 className="card-title">Hello</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <h5 className="card-title">{foodbook.name}</h5>
+                <h6>Recipes:</h6>
             </div>
             <ul className="list-group list-group-flush">
-                <li className="list-group-item">Cras justo odio</li>
-                <li className="list-group-item">Dapibus ac facilisis in</li>
-                <li className="list-group-item">Vestibulum at eros</li>
+                {foodbook.recipes.length ? foodbook.recipes.map((recipe) => 
+                    <li className="list-group-item d-flex" key={recipe._id}>
+                        <Link to={`/recipe/${recipe.edamam_id}`}>
+                            {recipe.name ? recipe.name : "No name recipe"}
+                        </Link>
+                        <div onClick={() => handleRecipeRemove(recipe._id)} title="Remove this recipe"><i className="fas fa-times-circle"></i></div>
+                    </li>
+                    ) 
+                : null}
             </ul>
-            <div className="card-body">
-                <a href="#" className="card-link">Card link</a>
-                <a href="#" className="card-link">Another link</a>
-            </div>
         </div>
         </>
     );
