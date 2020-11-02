@@ -52,7 +52,7 @@ const RecipeDetail = (props) => {
             <div className="container d-flex text-white rounded bg-dark top-banner">
                 <img className="card-img-left flex-auto d-none d-md-block"  src={recipe.image} alt={recipe.label} />
                 <div className="col-md-6 px-0 d-flex">
-                    <h1 className="display-4">{recipe.label}</h1>
+                    <h1 className="display-4 mr-auto">{recipe.label}</h1>
                 </div>
                 {/* TODO write a ternary to determine if the recipe has been saved into a user's foodbook(s), and if so, display an edit button, or if not, display the ADD button (and on search results also, as a stretch goal) */}
                 <ModalContainer triggerText={"Save Recipe"} />
@@ -83,7 +83,7 @@ const RecipeDetail = (props) => {
                             <td>{timeConvert(recipe.totalTime)}</td>
                         </tr>
                         <tr className="thead-dark">
-                            <th scope="col mx-auto text-center" colspan="2">Nutrition Facts <small>(per serving)</small></th>
+                            <th scope="col mx-auto text-center" colSpan="2">Nutrition Facts <small>(per serving)</small></th>
                         </tr>
                         <tr>
                             <th scope="row flex-wrap">Calories</th>
