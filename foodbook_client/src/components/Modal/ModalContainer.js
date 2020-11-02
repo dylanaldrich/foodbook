@@ -49,6 +49,8 @@ export class ModalContainer extends Component {
                         onClickOutside={this.onClickOutside}
                         triggerText={this.props.triggerText}
                         foodbookId={this.props.foodbookId}
+                        recipeName={this.props.recipeName}
+                        edamam_id={this.props.edamam_id}
                     />
                 ) : null}
             </>

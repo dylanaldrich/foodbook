@@ -17,7 +17,9 @@ export const Modal = ({
     buttonRef,
     closeModal,
     triggerText,
-    foodbookId
+    foodbookId,
+    recipeName,
+    edamam_id,
     }) => {
 
     function setForm (triggerText) {
@@ -26,7 +28,11 @@ export const Modal = ({
         } else if (triggerText === 'Login') {
             return (<LoginForm closeModal={closeModal} />);
         } else if (triggerText === "Save Recipe") {
-            return (<AddRecipeForm closeModal={closeModal} />);
+            return (<AddRecipeForm 
+                closeModal={closeModal} 
+                recipeName={recipeName}
+                edamam_id={edamam_id}
+            />);
         } else if (triggerText === "Edit Profile") {
             return (<EditUserForm closeModal={closeModal} />);
         } else if (triggerText === "Create a foodbook") {
