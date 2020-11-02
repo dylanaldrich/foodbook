@@ -9,8 +9,10 @@ import '../App.css';
 const FoodbookDetail = (props) => {
     const [recipeFilter, setRecipeFilter] = useState("");
     const [foodbook, setFoodbook] = useState({});
+    const [recipes, setRecipes] = useState([]);
     const [error, setError] = useState('');
 
+    // watches for change of url to rerender a new foodbook
     useEffect(function(){
             if(props.match.params.id) {
                 const foodbookId = props.match.params.id;
@@ -20,15 +22,21 @@ const FoodbookDetail = (props) => {
         [props.match.params.id]
     );
 
-    useEffect(() => {
-        console.log(recipeFilter);
+    // watches for change in recipe filter to invoke recipe filter method
+    useEffect(async () => {
+        console.log("filter by: ", recipeFilter);
+        await setRecipes(foodbook.recipes);
+        console.log("recipes when useeffect hits:", recipes);
+        if(recipeFilter !== "") return handleRecipeFilter();
     }, [recipeFilter]);
 
     function findFoodbook (foodbookId) {
         FoodbookModel.show(foodbookId)
-        .then((response) => {
+        .then(async (response) => {
             const foundFoodbook = response.foodbook;
-            setFoodbook(foundFoodbook);
+            await setFoodbook(foundFoodbook);
+            const foundRecipes = response.foodbook.recipes;
+            await setRecipes(foundRecipes);
         })
         .catch((error) => {
             setError(error.message);
@@ -39,6 +47,13 @@ const FoodbookDetail = (props) => {
         RecipeModel.remove(recipeId, foodbook._id)
             .catch((error) => console.log("Recipe remove error: ", error));
     };
+
+    async function handleRecipeFilter() {
+        console.log("recipes before filter:", recipes);
+        const filteredRecipes = recipes.filter(recipe => recipe.recipe_type === recipeFilter);
+        await setRecipes(filteredRecipes);
+        console.log("recipes after filter:", recipes);
+    }
 
     return (
         <>
@@ -59,13 +74,16 @@ const FoodbookDetail = (props) => {
                     <div className="col-md-auto mx-auto">
                         <h4 className="pt-2">Recipe Types</h4>
                         <div class="list-group mx-0">
-                            <div className="list-group-item list-group-item-action" onClick={(e) => setRecipeFilter("")}>All</div>
-                            <div className="list-group-item list-group-item-action" onClick={(e) => setRecipeFilter("appetizer")}>Appetizers</div>
-                            <div className="list-group-item list-group-item-action" onClick={(e) => setRecipeFilter("entree")}>Entrées</div>
-                            <div className="list-group-item list-group-item-action" onClick={(e) => setRecipeFilter("side")}>Sides</div>
-                            <div className="list-group-item list-group-item-action" onClick={(e) => setRecipeFilter("salad")}>Salads</div>
-                            <div className="list-group-item list-group-item-action" onClick={(e) => setRecipeFilter("dessert")}>Desserts</div>
-                            <div className="list-group-item list-group-item-action" onClick={(e) => setRecipeFilter("drink")}>Drinks</div>
+                            <div className="list-group-item list-group-item-action" onClick={() => {
+                                setRecipeFilter("");
+                                setRecipes(foodbook.recipes);
+                                }}>All</div>
+                            <div className="list-group-item list-group-item-action" onClick={() => setRecipeFilter("appetizer")}>Appetizers</div>
+                            <div className="list-group-item list-group-item-action" onClick={() => setRecipeFilter("entree")}>Entrées</div>
+                            <div className="list-group-item list-group-item-action" onClick={() => setRecipeFilter("side")}>Sides</div>
+                            <div className="list-group-item list-group-item-action" onClick={() => setRecipeFilter("salad")}>Salads</div>
+                            <div className="list-group-item list-group-item-action" onClick={() => setRecipeFilter("dessert")}>Desserts</div>
+                            <div className="list-group-item list-group-item-action" onClick={() => setRecipeFilter("drink")}>Drinks</div>
                         </div>
                     </div>
 
@@ -74,7 +92,7 @@ const FoodbookDetail = (props) => {
                         <h2 className="text-left pt-2 font-weight-bold">Recipes</h2>
                         <hr />
                         <ul className="list-group list-group-flush">
-                            {foodbook.recipes.length ? foodbook.recipes.map((recipe) => 
+                            {recipes ? recipes.map((recipe) => 
                                 <li className="list-group-item d-flex" key={recipe._id}>
                                     <Link to={`/recipe/${recipe.edamam_id}`}>
                                         {recipe.name ? recipe.name : "Mysterious Nameless Recipe"}
@@ -82,8 +100,8 @@ const FoodbookDetail = (props) => {
                                     <p className="ml-3 mr-auto text-muted font-italic">{recipe.recipe_type}</p>
                                     <div onClick={() => handleRecipeRemove(recipe._id)} title="Remove this recipe"><i className="fas fa-times-circle"></i></div>
                                 </li>
-                                ) 
-                            : <li className="list-group-item text-muted">This foodbook is looking a little empty. Search for some recipes and add them in!</li>}
+                                )
+                            : <li className="list-group-item text-muted">Nothing to see here! Search for some recipes and add them in!</li>}
                         </ul>
                     </div>
                 </div>

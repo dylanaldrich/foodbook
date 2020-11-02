@@ -83,7 +83,7 @@ const RecipeDetail = (props) => {
                             <td>{timeConvert(recipe.totalTime)}</td>
                         </tr>
                         <tr className="thead-dark">
-                            <th scope="col mx-auto text-center" colSpan="2">Nutrition Facts <small>(per serving)</small></th>
+                            <th scope="col mx-auto text-center" colSpan="2">Nutrition Facts <br/><small>(per serving)</small></th>
                         </tr>
                         <tr>
                             <th scope="row flex-wrap">Calories</th>
