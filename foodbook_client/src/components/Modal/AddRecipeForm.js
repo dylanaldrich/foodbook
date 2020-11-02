@@ -32,7 +32,8 @@ export const AddRecipeForm = ({closeModal}) => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        RecipeModel.create({recipe_type, selectedFoodbooks}).then((response) => {
+        console.log(event);
+        RecipeModel.create().then((response) => {
         console.log("Create recipe response:", response);
         if(response.status === 201) {
             console.log("Recipe created successfully");
@@ -44,29 +45,27 @@ export const AddRecipeForm = ({closeModal}) => {
     };
     
     return (
-        <form onSubmit={handleSubmit} className="justify-content-center">
+        <form onSubmit={handleSubmit}>
             {error && <p style={{ color: "red" }}>{error}</p>} 
-            <div className="form-group">
-                <label>
-                    Recipe type
-                    <select /* value={recipe_type} */ name={recipe_type} onChange={setRecipeType}>
+            <div className="form-group text-center">
+            <label htmlFor="recipe_type">Recipe type</label>
+                    <select /* value={recipe_type} */ className="ml-2" name={recipe_type} onChange={setRecipeType}>
                         <option value="entree">Entrée</option>
                         <option value="appetizer">Appetizer/Snack</option>
-                        <option value="side">Side dish</option>
+                        <option value="side">Side Dish</option>
                         <option value="salad">Salad</option>
                         <option value="dessert">Dessert</option>
                         <option value="drink">Drink</option>
                     </select>
-                </label>
             </div>
 
             {/* foodbook checkboxes */}
-            <div className="form-group">
-                <p>Foodbooks:</p> 
+            <div className="form-group text-center">
+                <h5>Foodbooks:</h5> 
                 <ul className="d-flex flex-wrap list-unstyled">
                     {allFoodbooks ? allFoodbooks.map((foodbook) => <li className="mx-auto">
                     <label htmlFor="name">{foodbook.name}</label> 
-                    <input type="checkbox" className="ml-2" name="name" key={foodbook._id} foodbookId={foodbook._id}/>
+                    <input type="checkbox" className="ml-2" name={`foodbook_${foodbook._id}`} key={foodbook._id} />
                     </li>)
                     : null}
                 </ul>
