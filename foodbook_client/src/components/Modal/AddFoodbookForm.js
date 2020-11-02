@@ -8,13 +8,11 @@ export const AddFoodbookForm = ({closeModal}) => {
     function handleSubmit(event) {
         event.preventDefault();
         FoodbookModel.create({name}).then((response) => {
-        console.log("Create response:", response);
-        if(response.status === 201) { // status code 201 means OK, successful
-            console.log("foodbook created successfully");
-            closeModal();
-        } else {
-            setError(response.message);
-        }
+            if(response.status === 201) {
+                closeModal();
+            } else {
+                setError(response.message);
+            }
         });
     };
     

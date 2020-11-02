@@ -8,6 +8,7 @@ import LoginForm from './LoginForm';
 import AddRecipeForm from './AddRecipeForm';
 import AddFoodbookForm from './AddFoodbookForm';
 import EditUserForm from './EditUserForm';
+import EditFoodbookForm from './EditFoodbookForm';
 
 export const Modal = ({
     onClickOutside,
@@ -15,7 +16,8 @@ export const Modal = ({
     modalRef,
     buttonRef,
     closeModal,
-    triggerText
+    triggerText,
+    foodbookId
     }) => {
 
     function setForm (triggerText) {
@@ -29,6 +31,8 @@ export const Modal = ({
             return (<EditUserForm closeModal={closeModal} />);
         } else if (triggerText === "Create a foodbook") {
             return (<AddFoodbookForm closeModal={closeModal} />);
+        } else if (triggerText === "Edit foodbook") {
+            return (<EditFoodbookForm closeModal={closeModal} foodbookId={foodbookId} />);
         } 
     };
 

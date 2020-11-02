@@ -4,7 +4,7 @@ import Home from '../pages/Home';
 // import About from '../pages/About';
 import RecipeDetail from '../pages/RecipeDetail';
 import Profile from '../pages/Profile';
-// import FoodbookDetail from '..pages/FoodbookDetail'
+import FoodbookDetail from '../pages/FoodbookDetail';
 
 // import { useRecoilValue } from "recoil";
 // import { loggedInState } from "../recoil/selectors";
@@ -20,7 +20,7 @@ const Routes = (props) => {
             {/* {loggedIn && (
                 <Switch> */}
                     <Route path='/profile/:id' component={Profile} />
-                    {/* <Route path='/foodbook/:id' component={FoodbookDetail} /> */}
+                    <Route path='/foodbook/:id' component={FoodbookDetail} />
                 {/* </Switch>
              )} */}
             {/* <Route path='*' component={NotFound} /> */}

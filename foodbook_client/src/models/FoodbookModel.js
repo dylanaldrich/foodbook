@@ -3,7 +3,12 @@ const URL = "http://localhost:3001/foodbooks";
 class FoodbookModel {
     // show
     static show = (foodbookId) => {
-        return fetch(`${URL}/${foodbookId}`).then(response => response.json());
+        return fetch(`${URL}/${foodbookId}`, {
+            headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.uid}`,
+            },
+        }).then(response => response.json());
     };
 
 
@@ -12,7 +17,8 @@ class FoodbookModel {
         return fetch(URL, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.uid}`,
             },
             body: JSON.stringify(foodbookData)
         })
@@ -25,7 +31,8 @@ class FoodbookModel {
         return fetch(`${URL}/${foodbookId}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.uid}`,
             },
             body: JSON.stringify(foodbookData)
         })
@@ -38,7 +45,8 @@ class FoodbookModel {
         return fetch(`${URL}/${foodbookId}`, {
             method: "DELETE",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.uid}`,
             }
         })
         .then(response => response.json());

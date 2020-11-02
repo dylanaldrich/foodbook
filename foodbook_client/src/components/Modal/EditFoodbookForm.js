@@ -1,0 +1,59 @@
+import React, {useState, useEffect} from 'react';
+import FoodbookModel from '../../models/FoodbookModel';
+
+export const EditFoodbookForm = ({foodbookId ,closeModal}) => {
+    const [name, setName] = useState("");
+    const [foodbook, setFoodbook] = useState({});
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        fetchFoodbook(foodbookId);
+    }, []);
+    
+    function fetchFoodbook(foodbookId) {
+        FoodbookModel.show(foodbookId)
+            .then((response) => {
+                setFoodbook(response.foodbook);
+                setName(response.foodbook.name);
+            })
+            .catch((error) => console.log("Recipe remove error: ", error));
+    };
+    
+    function handleSubmit(event) {
+        event.preventDefault();
+        foodbook.name = name;
+        FoodbookModel.update(foodbookId, foodbook).then((response) => {
+            if(response.status === 200) {
+                closeModal();
+            } else {
+                setError(response.message);
+            }
+        });
+    };
+    
+    return (
+        <form onSubmit={handleSubmit}>
+            {/* {fetchFoodbook(foodbookId)} */}
+            {error && <p style={{ color: "red" }}>{error}</p>} 
+            <div className="form-group">
+                <label htmlFor="name">Name</label>
+                <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    name='name'
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
+                />
+            </div>
+            <div className="form-group">
+                <button className="form-control btn btn-primary" type="submit">Submit</button>
+            </div>
+        </form>
+    );
+};
+
+export default EditFoodbookForm;
+
+
+// Adapted from: https://blog.bitsrc.io/build-a-full-featured-modal-dialog-form-with-react-651dcef6c571

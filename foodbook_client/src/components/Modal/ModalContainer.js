@@ -48,6 +48,7 @@ export class ModalContainer extends Component {
                         onKeyDown={this.onKeyDown}
                         onClickOutside={this.onClickOutside}
                         triggerText={this.props.triggerText}
+                        foodbookId={this.props.foodbookId}
                     />
                 ) : null}
             </>
