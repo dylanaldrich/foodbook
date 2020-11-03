@@ -151,6 +151,10 @@ svg, rect {
   cursor: pointer;
 }
 
-/* table {
-  border: 2px solid black;
-} */
+.remove-recipe-btn{
+  transition: linear .1s;
+}
+
+.remove-recipe-btn:hover {
+  transform: scale(1.2);
+}

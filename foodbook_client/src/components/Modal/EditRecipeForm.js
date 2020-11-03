@@ -8,8 +8,8 @@ import UserModel from '../../models/UserModel';
 import { useRecoilState } from "recoil";
 import { userState } from "../../recoil/atoms";
 
-export const EditRecipeForm = ({closeModal, recipeName, edamam_id}) => {    
-    const [recipe_type, setRecipeType] = useState("entree");
+export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, savedFoodbooks}) => {    
+    const [recipe_type, setRecipeType] = useState(recipeType);
     const [allFoodbooks, setAllFoodbooks] = useState([]);
     const [user, setUser] = useRecoilState(userState);
     const [selectedFoodbooks, setSelectedFoodbooks] = useState([]);
@@ -26,6 +26,8 @@ export const EditRecipeForm = ({closeModal, recipeName, edamam_id}) => {
         }
     }, []);
 
+    console.log("recipeType: ", recipeType);
+    console.log("savedFoodbooks: ", savedFoodbooks);
 
     function handleSubmit(event) {
         event.preventDefault();

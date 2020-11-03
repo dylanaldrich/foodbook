@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 import RecipeModel from '../../models/RecipeModel';
 
-const FoodbookCard = ({foodbook}) => {
+const FoodbookCard = ({foodbook, findProfile, profileId}) => {
     const [,setState] = useState();
     useEffect(() => {
         setState({});
@@ -30,7 +30,15 @@ const FoodbookCard = ({foodbook}) => {
                         <Link to={`/recipe/${recipe.edamam_id}`}>
                             {recipe.name ? recipe.name : "Mysterious Nameless Recipe"}
                         </Link>
-                        <div onClick={() => handleRecipeRemove(recipe._id)} title="Remove this recipe"><i className="fas fa-times-circle"></i></div>
+                        <div 
+                            onClick={() => {
+                            handleRecipeRemove(recipe._id)
+                            findProfile(profileId)
+                            }} 
+                            className="remove-recipe-btn ml-3"
+                            title="Remove this recipe">
+                                <i className="fas fa-times-circle"></i>
+                        </div>
                     </li>
                     ) 
                 : <li className="list-group-item text-muted">This foodbook is looking a little empty. Search for some recipes and add them in!</li> }

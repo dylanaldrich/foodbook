@@ -7,6 +7,7 @@ import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
 import AddRecipeForm from './AddRecipeForm';
 import AddFoodbookForm from './AddFoodbookForm';
+import EditRecipeForm from './EditRecipeForm';
 import EditUserForm from './EditUserForm';
 import EditFoodbookForm from './EditFoodbookForm';
 
@@ -20,6 +21,9 @@ export const Modal = ({
     foodbookId,
     recipeName,
     edamam_id,
+    recipeType,
+    savedFoodbooks,
+    findProfile,
     }) => {
 
     function setForm (triggerText) {
@@ -33,10 +37,18 @@ export const Modal = ({
                 recipeName={recipeName}
                 edamam_id={edamam_id}
             />);
+        } else if (triggerText === "Edit Recipe") {
+            return (<EditRecipeForm 
+                closeModal={closeModal} 
+                recipeName={recipeName}
+                edamam_id={edamam_id}
+                savedFoodbooks={savedFoodbooks}
+                recipeType={recipeType}
+            />);
         } else if (triggerText === "Edit Profile") {
             return (<EditUserForm closeModal={closeModal} />);
         } else if (triggerText === "Create a foodbook") {
-            return (<AddFoodbookForm closeModal={closeModal} />);
+            return (<AddFoodbookForm closeModal={closeModal} findProfile={findProfile} />);
         } else if (triggerText === "Edit foodbook") {
             return (<EditFoodbookForm closeModal={closeModal} foodbookId={foodbookId} />);
         } 

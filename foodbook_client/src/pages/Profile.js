@@ -19,13 +19,13 @@ const Profile = (props) => {
     useEffect(function(){
             if(props.match.params.id) {
                 const userId = props.match.params.id;
-                findUser(userId);
+                findProfile(userId);
             }
         },
         [props.match.params.id]
     );
 
-    function findUser (userId) {
+    function findProfile (userId) {
         UserModel.show(userId)
         .then((response) => {
             setUser(response.data);
@@ -57,12 +57,12 @@ const Profile = (props) => {
                         <ModalContainer triggerText={"Edit Profile"} />
                     </div>
                     <div className="page-header container">
-                        <h2 className="text-left pt-2 font-weight-bold">My foodbooks <ModalContainer triggerText={"Create a foodbook"} /></h2>
+                        <h2 className="text-left pt-2 font-weight-bold">My foodbooks <ModalContainer triggerText={"Create a foodbook"} findProfile={findProfile} /></h2>
                         <hr />
                     </div>
                     <div className="container">
                         {user.foodbooks.length ?
-                        <FoodbooksContainer foodbooks={foodbooks} />
+                        <FoodbooksContainer foodbooks={foodbooks} findProfile={findProfile} profileId={props.match.params.id} />
                         : <p>You haven't created any foodbooks yet!</p> }
                     </div>
                 </> 

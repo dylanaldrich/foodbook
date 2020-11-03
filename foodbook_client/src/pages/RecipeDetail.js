@@ -3,15 +3,15 @@ import ModalContainer from '../components/Modal/ModalContainer';
 import SearchModel from '../models/SearchModel';
 import UserModel from '../models/UserModel';
 
-import { useRecoilState } from "recoil";
-import { userState } from "../recoil/atoms";
+// import { useRecoilState } from "recoil";
+// import { userState } from "../recoil/atoms";
 
 import '../App.css';
 
 const RecipeDetail = (props) => {
     const [recipe, setRecipe] = useState({});
     const [isSaved, setIsSaved] = useState(false);
-    const [user, setUser] = useRecoilState(userState);
+    // const [user, setUser] = useRecoilState(userState);
     const [userRecipe, setUserRecipe] = useState({});
     const [error, setError] = useState('');
 
@@ -22,12 +22,6 @@ const RecipeDetail = (props) => {
         },
         [userRecipe]);
 
-    // useEffect(function(){
-    //         if(!isSaved) {
-    //             determineIfSaved();
-    //         }
-    //     },
-    //     [userRecipe]);
 
     useEffect(function(){
             if(props.match.params.id) {
@@ -37,6 +31,12 @@ const RecipeDetail = (props) => {
         },
         [props.match.params.id]
     );
+
+    useEffect(function(){
+        setUserRecipe({});
+    },
+    [props.match.params.id]
+);
 
     function determineIfSaved() {
         if(localStorage.getItem('uid')) {
@@ -69,8 +69,9 @@ const RecipeDetail = (props) => {
         let minutes = (hours - rhours) * 60;
         let rminutes = Math.round(minutes);
 
+        if(!n) return "N/A";
         if(!rminutes) return rhours + "h";
-        if(rhours) return rhours + "h " + rminutes + "m";
+        if(rhours > 0) return rhours + "h " + rminutes + "m";
         return rminutes + "mins";
     }
 
@@ -80,8 +81,9 @@ const RecipeDetail = (props) => {
 
     return (
         <>
-        {recipe.image && userRecipe.name ? 
+        {recipe.image ? 
             <>
+            {console.log("userRecipe", userRecipe)}
             {/* Banner */}
             {error && <p style={{ color: "red" }}>{error}</p>}
             <div className="container d-flex text-white rounded bg-dark top-banner">
@@ -89,10 +91,10 @@ const RecipeDetail = (props) => {
                 <div className="col-md-6 px-0 d-flex">
                     <h1 className="display-4 mr-auto">{recipe.label}</h1>
                 </div>
-                {/* TODO write a ternary to determine if the recipe has been saved into a user's foodbook(s), and if so, display an edit button, or if not, display the ADD button (and on search results also, as a stretch goal) */}
-                {isSaved ? <ModalContainer 
+                {/* Add or Edit button */}
+                {isSaved && userRecipe.name ? <ModalContainer 
                     triggerText={"Edit Recipe"} 
-                    recipe_type={userRecipe.recipe_type} 
+                    recipeType={userRecipe.recipe_type} 
                     savedFoodbooks={userRecipe.foodbooks} 
                     recipeName={userRecipe.name} 
                     edamam_id={userRecipe.edamam_id} 
@@ -105,7 +107,6 @@ const RecipeDetail = (props) => {
                     findOneRecipe={findOneRecipe} 
                     /> 
                 }
-                
             </div>
             {/* Banner End */}
 
@@ -169,7 +170,7 @@ const RecipeDetail = (props) => {
                 </div>
             </div>
             </>
-            : <p>Loading...</p> }
+            : <h2 className="mt-5">Loading...</h2> }
         </>
     );
 };
