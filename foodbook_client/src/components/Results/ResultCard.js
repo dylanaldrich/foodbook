@@ -16,7 +16,7 @@ const ResultCard = ({title, source, imageUrl, edamam_id, setActive, setResults})
                         setActive(false);
                         setResults([]);
                     }}>
-                        <NavLink to={`/recipe/${edamam_id}`} className="btn btn-sm">View</NavLink>
+                        <NavLink to={`/recipe/${edamam_id}`} className="btn btn-dark">View</NavLink>
                     </div>
                 </div>
             </div>

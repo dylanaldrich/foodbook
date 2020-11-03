@@ -108,7 +108,7 @@ const NavBar = (props) => {
             {active ? (<button onClick={(e) => {
                 setActive(false);
                 setResults([]);
-            }} className="btn btn-lg btn-danger center" id="close-search">Close Search</button>) : null}
+            }} className="btn btn-md btn-danger center align-self-start mt-5" id="close-search">Close Search</button>) : null}
         </div>
     );
 };

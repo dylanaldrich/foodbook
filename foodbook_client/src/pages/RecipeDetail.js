@@ -109,9 +109,9 @@ const RecipeDetail = (props) => {
                 }
             </div>
             {/* Banner End */}
-
-            {/* At a Glance Table */}
-            <div className="container d-flex">
+            
+            <div className="container d-flex mt-3 justify-content-around">
+                {/* At a Glance Table */}
                 <table class="table col-4 table-striped border border-dark">
                     <thead className="thead-dark">
                         <tr>
@@ -160,10 +160,10 @@ const RecipeDetail = (props) => {
                 </table>
                 <div className="col-6">
                     {/* A button to go to the recipe's source */}
-                    <a href={recipe.url} className="btn btn-lg btn-danger center" rel="noreferrer">See Full Directions</a>
+                    <a href={recipe.url} className="btn btn-lg btn-info center" rel="noreferrer">See Full Directions</a>
 
                     {/* A list of ingredients */}
-                    <h3>Ingredients</h3>
+                    <h3 className="text-white bg-dark rounded py-2 mt-3" >Ingredients</h3>
                     <ul className="list-group list-group-flush">
                         {recipe.ingredientLines.map((ingredient) => <li className="list-group-item">{ingredient}</li>)}
                     </ul>

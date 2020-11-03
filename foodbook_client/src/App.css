@@ -52,6 +52,12 @@ hr {
   padding: 65px 0 0 0;
 }
 
+@media screen and (min-width: 576px) {
+  .jumbotron {
+      padding: 4rem 2rem 0rem;
+  }
+}
+
 h1 {
   margin-bottom: 0;
 }
@@ -157,6 +163,10 @@ svg, rect {
 
 .remove-recipe-btn:hover {
   transform: scale(1.2);
+}
+
+.btn-info {
+  max-height: 48px;
 }
 
 #copyright {
