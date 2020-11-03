@@ -1,24 +1,53 @@
 import React, {useState, useEffect} from 'react';
 import ModalContainer from '../components/Modal/ModalContainer';
 import SearchModel from '../models/SearchModel';
+import UserModel from '../models/UserModel';
+
+import { useRecoilState } from "recoil";
+import { userState } from "../recoil/atoms";
 
 import '../App.css';
 
 const RecipeDetail = (props) => {
     const [recipe, setRecipe] = useState({});
+    const [isSaved, setIsSaved] = useState(false);
+    const [user, setUser] = useRecoilState(userState);
+    const [userRecipes, setUserRecipes] = useState([]);
     const [error, setError] = useState('');
+
+    useEffect(function(){
+            if(!userRecipes.length) {
+                fetchUser();
+            }
+        },
+        []);
+
+    useEffect(function(){
+            if(!isSaved) {
+                determineIfSaved();
+            }
+        },
+        [userRecipes]);
 
     useEffect(function(){
             if(props.match.params.id) {
                 const edamam_id = props.match.params.id;
-                findRecipe(edamam_id);
+                findOneRecipe(edamam_id);
             }
         },
         [props.match.params.id]
     );
 
-    function findRecipe (recipe_id) {
-        SearchModel.findRecipe(recipe_id)
+    function fetchUser() {
+        if(localStorage.getItem('uid')) {
+            UserModel.show().then((response) => {
+                setUserRecipes(response.recipes);
+            });
+        }
+    };
+
+    function findOneRecipe (recipe_id) {
+        SearchModel.searchOneRecipe(recipe_id)
         .then((response) => {
             const foundRecipe = response.searchResults.hits[0].recipe;
             setRecipe(foundRecipe);
@@ -27,6 +56,13 @@ const RecipeDetail = (props) => {
             setError(error.message);
         });
     };
+
+    function determineIfSaved() {
+        userRecipes.forEach(index => {
+            if(recipe.uri.includes(index.edamam_id)) {
+                setIsSaved(true);
+            }});
+    };       
 
     /* Adapted from: https://www.w3resource.com/javascript-exercises/javascript-date-exercise-13.php */
     function timeConvert(n) {
@@ -45,7 +81,7 @@ const RecipeDetail = (props) => {
 
     return (
         <>
-        {recipe.image ? 
+        {recipe.image && userRecipes.length ? 
             <>
             {/* Banner */}
             {error && <p style={{ color: "red" }}>{error}</p>}
@@ -55,7 +91,7 @@ const RecipeDetail = (props) => {
                     <h1 className="display-4 mr-auto">{recipe.label}</h1>
                 </div>
                 {/* TODO write a ternary to determine if the recipe has been saved into a user's foodbook(s), and if so, display an edit button, or if not, display the ADD button (and on search results also, as a stretch goal) */}
-                <ModalContainer triggerText={"Save Recipe"} recipeName={recipe.label} edamam_id={props.match.params.id} />
+                <ModalContainer triggerText={"Save Recipe"} recipeName={recipe.label} edamam_id={props.match.params.id} findOneRecipe={findOneRecipe} />
             </div>
             {/* Banner End */}
 
