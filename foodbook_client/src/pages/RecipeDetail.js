@@ -12,22 +12,22 @@ const RecipeDetail = (props) => {
     const [recipe, setRecipe] = useState({});
     const [isSaved, setIsSaved] = useState(false);
     const [user, setUser] = useRecoilState(userState);
-    const [userRecipes, setUserRecipes] = useState([]);
+    const [userRecipe, setUserRecipe] = useState({});
     const [error, setError] = useState('');
 
     useEffect(function(){
-            if(!userRecipes.length) {
-                fetchUser();
-            }
-        },
-        []);
-
-    useEffect(function(){
-            if(!isSaved) {
+            if(!userRecipe.name) {
                 determineIfSaved();
             }
         },
-        [userRecipes]);
+        [userRecipe]);
+
+    // useEffect(function(){
+    //         if(!isSaved) {
+    //             determineIfSaved();
+    //         }
+    //     },
+    //     [userRecipe]);
 
     useEffect(function(){
             if(props.match.params.id) {
@@ -38,10 +38,15 @@ const RecipeDetail = (props) => {
         [props.match.params.id]
     );
 
-    function fetchUser() {
+    function determineIfSaved() {
         if(localStorage.getItem('uid')) {
             UserModel.show().then((response) => {
-                setUserRecipes(response.recipes);
+                response.recipes.forEach(index => {
+                    if (index.edamam_id === props.match.params.id) {
+                        setIsSaved(true);
+                        return setUserRecipe(index);
+                    } 
+                })
             });
         }
     };
@@ -55,14 +60,7 @@ const RecipeDetail = (props) => {
         .catch((error) => {
             setError(error.message);
         });
-    };
-
-    function determineIfSaved() {
-        userRecipes.forEach(index => {
-            if(recipe.uri.includes(index.edamam_id)) {
-                setIsSaved(true);
-            }});
-    };       
+    };      
 
     /* Adapted from: https://www.w3resource.com/javascript-exercises/javascript-date-exercise-13.php */
     function timeConvert(n) {
@@ -71,6 +69,7 @@ const RecipeDetail = (props) => {
         let minutes = (hours - rhours) * 60;
         let rminutes = Math.round(minutes);
 
+        if(!rminutes) return rhours + "h";
         if(rhours) return rhours + "h " + rminutes + "m";
         return rminutes + "mins";
     }
@@ -81,7 +80,7 @@ const RecipeDetail = (props) => {
 
     return (
         <>
-        {recipe.image && userRecipes.length ? 
+        {recipe.image && userRecipe.name ? 
             <>
             {/* Banner */}
             {error && <p style={{ color: "red" }}>{error}</p>}
@@ -91,7 +90,22 @@ const RecipeDetail = (props) => {
                     <h1 className="display-4 mr-auto">{recipe.label}</h1>
                 </div>
                 {/* TODO write a ternary to determine if the recipe has been saved into a user's foodbook(s), and if so, display an edit button, or if not, display the ADD button (and on search results also, as a stretch goal) */}
-                <ModalContainer triggerText={"Save Recipe"} recipeName={recipe.label} edamam_id={props.match.params.id} findOneRecipe={findOneRecipe} />
+                {isSaved ? <ModalContainer 
+                    triggerText={"Edit Recipe"} 
+                    recipe_type={userRecipe.recipe_type} 
+                    savedFoodbooks={userRecipe.foodbooks} 
+                    recipeName={userRecipe.name} 
+                    edamam_id={userRecipe.edamam_id} 
+                    findOneRecipe={findOneRecipe} 
+                    /> 
+                    : <ModalContainer 
+                    triggerText={"Save Recipe"} 
+                    recipeName={recipe.label} 
+                    edamam_id={props.match.params.id} 
+                    findOneRecipe={findOneRecipe} 
+                    /> 
+                }
+                
             </div>
             {/* Banner End */}
 

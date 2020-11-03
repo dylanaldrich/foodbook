@@ -8,7 +8,7 @@ import UserModel from '../../models/UserModel';
 import { useRecoilState } from "recoil";
 import { userState } from "../../recoil/atoms";
 
-export const AddRecipeForm = ({closeModal, recipeName, edamam_id}) => {    
+export const EditRecipeForm = ({closeModal, recipeName, edamam_id}) => {    
     const [recipe_type, setRecipeType] = useState("entree");
     const [allFoodbooks, setAllFoodbooks] = useState([]);
     const [user, setUser] = useRecoilState(userState);
@@ -29,7 +29,7 @@ export const AddRecipeForm = ({closeModal, recipeName, edamam_id}) => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        RecipeModel.create({recipe_type, foodbooksIds: selectedFoodbooks, name: recipeName, edamam_id}).then((response) => {
+        RecipeModel.update({recipe_type, foodbooksIds: selectedFoodbooks, name: recipeName, edamam_id}).then((response) => {
         console.log("Create recipe response:", response);
         if(response.status === 201) {
             console.log("Recipe created successfully");
@@ -50,9 +50,6 @@ export const AddRecipeForm = ({closeModal, recipeName, edamam_id}) => {
             setSelectedFoodbooks([...selectedFoodbooks, e.target.value]);
         }
     }
-
-    console.log("recipeName", recipeName);
-    console.log("edamam_id", edamam_id);
 
     const generateCheckbox = allFoodbooks ? allFoodbooks.map((foodbook) => {
         return <li className="mx-auto">
@@ -90,14 +87,14 @@ export const AddRecipeForm = ({closeModal, recipeName, edamam_id}) => {
             {/* submit button */}
             <div className="form-group">
                 <button className="form-control btn btn-primary" type="submit">
-                    Save Recipe
+                    Update Recipe
                 </button>
             </div>
         </form>
     );
 };
 
-export default AddRecipeForm;
+export default EditRecipeForm;
 
 
 // // Adapted from: https://blog.bitsrc.io/build-a-full-featured-modal-dialog-form-with-react-651dcef6c571
