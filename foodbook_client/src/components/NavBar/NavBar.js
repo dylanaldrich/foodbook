@@ -70,6 +70,7 @@ const NavBar = (props) => {
                 <div className='collapse navbar-collapse' id='navbarCollapse'>
                     {active ? (<button onClick={(e) => {
                         setActive(false);
+                        setQuery("");
                         setResults([]);
                     }} className="btn btn-md btn-info mx-2"><i class="fas fa-times"></i></button>) : null}
                     <form className='form-inline mt-2 mt-md-0 p2 align-item-start'>

@@ -8,7 +8,7 @@ import UserModel from '../../models/UserModel';
 import { useRecoilState } from "recoil";
 import { userState } from "../../recoil/atoms";
 
-export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, savedFoodbooks}) => {    
+export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, savedFoodbooks, savedRecipeId}) => {    
     const [recipe_type, setRecipeType] = useState(recipeType);
     const [allFoodbooks, setAllFoodbooks] = useState([]);
     const [user, setUser] = useRecoilState(userState);
@@ -21,6 +21,7 @@ export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, s
                 console.log("response to user show", response);
                 setUser(response.data);
                 setAllFoodbooks(response.foodbooks);
+                fetchRecipeFoodbooks();
                 console.log("allFoodbooks", allFoodbooks);
             });
         }
@@ -28,6 +29,12 @@ export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, s
 
     console.log("recipeType: ", recipeType);
     console.log("savedFoodbooks: ", savedFoodbooks);
+
+    async function fetchRecipeFoodbooks () {
+        await RecipeModel.show(savedRecipeId).then(response => {
+            console.log("recipe show response:", response);
+        });
+    };
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -54,9 +61,10 @@ export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, s
     }
 
     const generateCheckbox = allFoodbooks ? allFoodbooks.map((foodbook) => {
+        // Handle the logic if foodbook is in selectedFoodbooks array, return a checked checkbox, else uncheck 
         return <li className="mx-auto">
         <label htmlFor="name">{foodbook.name}</label> 
-        <input type="checkbox" onChange={handleChange}  className="ml-2" name={`foodbook_${foodbook._id}`} value={foodbook._id} key={foodbook._id} />
+        <input type="checkbox" checked onChange={handleChange}  className="ml-2" name={`foodbook_${foodbook._id}`} value={foodbook._id} key={foodbook._id} />
         </li>;
     }) : null;
 

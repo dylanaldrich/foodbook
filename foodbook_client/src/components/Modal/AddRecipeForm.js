@@ -6,7 +6,7 @@ import UserModel from '../../models/UserModel';
 import { useRecoilState } from "recoil";
 import { userState } from "../../recoil/atoms";
 
-export const AddRecipeForm = ({closeModal, recipeName, edamam_id}) => {    
+export const AddRecipeForm = ({closeModal, recipeName, edamam_id, findOneRecipe, currentRecipeId}) => {    
     const [recipe_type, setRecipeType] = useState("entree");
     const [allFoodbooks, setAllFoodbooks] = useState([]);
     const [user, setUser] = useRecoilState(userState);
@@ -31,6 +31,7 @@ export const AddRecipeForm = ({closeModal, recipeName, edamam_id}) => {
         console.log("Create recipe response:", response);
         if(response.status === 201) {
             console.log("Recipe created successfully");
+            findOneRecipe(currentRecipeId);
             closeModal();
         } else {
             setError(response.message);

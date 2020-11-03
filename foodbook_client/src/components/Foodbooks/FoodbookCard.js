@@ -30,8 +30,8 @@ const FoodbookCard = ({foodbook, findProfile, profileId}) => {
                             </Link>
                             <div 
                                 onClick={() => {
-                                handleRecipeRemove(recipe._id)
-                                findProfile(profileId)
+                                handleRecipeRemove(recipe._id);
+                                findProfile(profileId);
                                 }} 
                                 className="remove-recipe-btn ml-3"
                                 title="Remove this recipe">

@@ -25,6 +25,9 @@ export const Modal = ({
     savedFoodbooks,
     findProfile,
     profileId,
+    findOneRecipe,
+    currentRecipeId,
+    savedRecipeId,
     }) => {
 
     function setForm (triggerText) {
@@ -37,6 +40,8 @@ export const Modal = ({
                 closeModal={closeModal} 
                 recipeName={recipeName}
                 edamam_id={edamam_id}
+                findOneRecipe={findOneRecipe}
+                currentRecipeId={currentRecipeId}
             />);
         } else if (triggerText === "Edit Recipe") {
             return (<EditRecipeForm 
@@ -45,6 +50,7 @@ export const Modal = ({
                 edamam_id={edamam_id}
                 savedFoodbooks={savedFoodbooks}
                 recipeType={recipeType}
+                savedRecipeId={savedRecipeId}
             />);
         } else if (triggerText === "Edit Profile") {
             return (<EditUserForm 

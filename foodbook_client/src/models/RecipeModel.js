@@ -2,9 +2,14 @@ const URL = "http://localhost:3001/recipe";
 
 class RecipeModel {
     // show
-    // TODO refactor this once I figure out how to save recipes from the API
     static show = (recipeId) => {
-        return fetch(`${URL}/${recipeId}`).then(response => response.json());
+        return fetch(`${URL}/${recipeId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.uid}`,
+            },
+        }).then(response => response.json());
     };
 
 

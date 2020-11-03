@@ -61,11 +61,13 @@ const FoodbookDetail = (props) => {
             <>
             {/* Banner */}
             {error && <p style={{ color: "red" }}>{error}</p>}
-            <div className="container text-white rounded bg-dark top-banner">
-                <div className="col-md-6 px-0 d-flex">
-                    <h1 className="display-4 mr-auto">{foodbook.name}</h1>
+            <div className="container text-white rounded bg-dark d-flex align-items-center top-banner">
+                <div className="col-md-6 px-0">
+                    <h1 className="display-4 text-left">{foodbook.name}</h1>
                 </div>
-                <ModalContainer triggerText={"Edit foodbook"} foodbookId={foodbook._id} />
+                <div className="ml-auto">
+                    <ModalContainer triggerText={"Edit foodbook"} foodbookId={foodbook._id} />
+                </div>
             </div>
             {/* Banner End */}
             <div className="page-header container ">

@@ -1,13 +1,13 @@
 import React from 'react';
 
-const TriggerButton = ({ triggerText, buttonRef, showModal, navClass }) => {
-    function setClassName(string) {
-        if(string === "Login" || string === "Sign Up") {
-            return "nav-item nav-link nav-button";
-        } 
-        return "btn btn-md btn-info center modal-button";
+const TriggerButton = ({ triggerText, buttonRef, showModal}) => {
+    // function setClassName(string) {
+    //     if(string === "Login" || string === "Sign Up") {
+    //         return "nav-item nav-link nav-button";
+    //     } 
+    //     return "btn btn-md btn-info center modal-button";
     
-    }
+    // }
     
     return (
         <button

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import ModalContainer from '../components/Modal/ModalContainer';
 import SearchModel from '../models/SearchModel';
 import UserModel from '../models/UserModel';
@@ -98,13 +99,15 @@ const RecipeDetail = (props) => {
                             savedFoodbooks={userRecipe.foodbooks} 
                             recipeName={userRecipe.name} 
                             edamam_id={userRecipe.edamam_id} 
-                            findOneRecipe={findOneRecipe} 
+                            findOneRecipe={findOneRecipe}
+                            savedRecipeId={userRecipe._id} 
                             /> 
                             : <ModalContainer 
                             triggerText={"Save Recipe"} 
                             recipeName={recipe.label} 
                             edamam_id={props.match.params.id} 
                             findOneRecipe={findOneRecipe} 
+                            currentRecipeId={props.match.params.id} 
                             /> 
                         }
                     </div>
@@ -124,7 +127,7 @@ const RecipeDetail = (props) => {
                         <tr>
                             <th scope="row">Source</th>
                             <td>
-                                <a href={recipe.url} target="_blank" rel="noreferrer">{recipe.source}</a>
+                                <a href={recipe.url} target="_blank">{recipe.source}</a>
                             </td>
                         </tr>
                         <tr>
@@ -162,7 +165,7 @@ const RecipeDetail = (props) => {
                 </table>
                 <div className="col-6">
                     {/* A button to go to the recipe's source */}
-                    <a href={recipe.url} className="btn btn-lg btn-info center" rel="noreferrer">See Full Directions</a>
+                    <a href={recipe.url} className="btn btn-lg btn-info center" target="_blank">See Full Directions</a>
 
                     {/* A list of ingredients */}
                     <h3 className="text-white bg-dark rounded py-2 mt-3" >Ingredients</h3>

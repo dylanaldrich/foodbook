@@ -25,6 +25,13 @@ const Profile = (props) => {
         [props.match.params.id]
     );
 
+    useEffect(function() {
+        if(foodbooks) {
+            const userId = props.match.params.id;
+            findProfile(userId);
+        }
+    }, [foodbooks])
+
     function findProfile (userId) {
         UserModel.show(userId)
         .then((response) => {
