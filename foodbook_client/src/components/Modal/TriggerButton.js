@@ -1,9 +1,17 @@
 import React from 'react';
 
-const TriggerButton = ({ triggerText, buttonRef, showModal }) => {
+const TriggerButton = ({ triggerText, buttonRef, showModal, navClass }) => {
+    function setClassName(string) {
+        if(string === "Login" || string === "Sign Up") {
+            return "nav-item nav-link nav-button";
+        } 
+        return "btn btn-md btn-info center modal-button";
+    
+    }
+    
     return (
         <button
-            className="btn btn-md btn-info center modal-button"
+            className="btn btn-md btn-info center modal-button w-auto"  
             ref={buttonRef}
             onClick={showModal}
         >

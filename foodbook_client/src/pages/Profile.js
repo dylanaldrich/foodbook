@@ -49,20 +49,23 @@ const Profile = (props) => {
             {user ? 
                 <>
                     {/* Banner */}
-                    <div className="container text-white rounded bg-dark top-banner">
-                        <div className="col-md-6 px-0 d-flex">
-                            <h1 className="display-4 mr-auto">{user.username}'s Profile</h1>
+                    <div className="container text-white rounded bg-dark d-flex align-items-center top-banner">
+                        <div className="col-md-6 px-0">
+                            <h1 className="display-4 text-left">{user.username}'s Profile</h1>
                         </div>
-                        {/* this button will become a modal trigger for profile edit form */}
-                        <ModalContainer 
-                            triggerText={"Edit Profile"}
-                            findProfile={findProfile} profileId={props.match.params.id} />
+                        {/* Edit Profile Button */}
+                        <div className="ml-auto">
+                            <ModalContainer 
+                                triggerText={"Edit Profile"}
+                                findProfile={findProfile} profileId={props.match.params.id}
+                            />
+                        </div>
                     </div>
-                    <div className="page-header container">
+                    <div className="page-header container d-flex align-items-center">
                         <h2 className="text-left pt-2 font-weight-bold">My foodbooks <ModalContainer triggerText={"Create a foodbook"} findProfile={findProfile} profileId={props.match.params.id} /></h2>
-                        <hr />
                     </div>
                     <div className="container">
+                        <hr />
                         {user.foodbooks.length ?
                         <FoodbooksContainer foodbooks={foodbooks} findProfile={findProfile} profileId={props.match.params.id} />
                         : <p>You haven't created any foodbooks yet!</p> }

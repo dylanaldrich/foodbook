@@ -24,6 +24,10 @@
     font-size: 24px;
 }
 
+.nav-link:hover {
+    cursor: pointer;
+}
+
 .navbar-active {
     height: 100vh;
     z-index: 10;
@@ -35,4 +39,13 @@ nav {
 
 #profile-link{
     min-width: 155px;
+}
+
+#search-results{
+    margin-top: 60px;
+}
+
+.nav-button{
+    background-color: none;
+    margin: 0 auto;
 }

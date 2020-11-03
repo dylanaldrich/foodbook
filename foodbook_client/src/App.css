@@ -180,3 +180,15 @@ footer {
   bottom: -70px;
   min-width: 172px;
 }
+
+.card-img-left{
+  max-height: 200px;
+}
+
+.foodbook-card{
+  transition: linear .2s;
+}
+
+.foodbook-card:hover {
+  transform: scale(1.1);
+}

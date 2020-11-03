@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 
 import ModalContainer from '../Modal/ModalContainer';
 import SearchModel from '../../models/SearchModel';
@@ -16,6 +16,7 @@ const NavBar = (props) => {
     const [results, setResults] = useState([]);
     const [query, setQuery]= useState("");
     const [user, setUser] = useRecoilState(userState);
+    let history = useHistory();
 
     useEffect(function () {
         if(localStorage.getItem('uid')) {
@@ -39,6 +40,7 @@ const NavBar = (props) => {
     function logout () {
         setUser(null);
         localStorage.clear();
+        history.push("/");
     };
     
     function fetchRecipes (query) {
@@ -60,13 +62,17 @@ const NavBar = (props) => {
 
     return (
         <div className={`navbar ${active ? "navbar-active overflow-auto" : ""}`}>
-            <nav class='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
+            <nav class='navbar navbar-expand-md navbar-dark fixed-top bg-dark d-flex'>
                 <NavLink className='navbar-brand navbar__titles' to='/'>foodbook</NavLink>
                 <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarCollapse' aria-controls='navbarCollapse' aria-expanded='false' aria-label='Toggle navigation'>
                 <span className='navbar-toggler-icon'></span>
                 </button>
                 <div className='collapse navbar-collapse' id='navbarCollapse'>
-                    <form className='form-inline mt-2 mt-md-0 align-item-start'>
+                    {active ? (<button onClick={(e) => {
+                        setActive(false);
+                        setResults([]);
+                    }} className="btn btn-md btn-info mx-2"><i class="fas fa-times"></i></button>) : null}
+                    <form className='form-inline mt-2 mt-md-0 p2 align-item-start'>
                         <input 
                             className='form-control mr-sm-2' 
                             type='text' 
@@ -77,24 +83,24 @@ const NavBar = (props) => {
                         />
                     </form>
                     <ul className='navbar-nav ml-auto'>
-                        <li className='nav-item active'>
-                        <NavLink className='nav-link' to='/about'>About<span className='sr-only'>(current)</span></NavLink>
+                        <li className='nav-item'>
+                        <NavLink className='nav-link' to='/about'>About</NavLink>
                         </li>
                         {user ? (
                             <>
-                                <li className='nav-item active'>
+                                <li className='nav-item'>
                                     <NavLink className='nav-link' id="profile-link" to={`/profile/${user._id}`}>My Profile</NavLink>
                                 </li>
-                                <li className='nav-item active nav-link' onClick={logout}>
+                                <li className='nav-item nav-link' onClick={logout}>
                                     Logout
                                 </li>
                             </>
                         ) : (
                             <>
-                                <li className='nav-item'>
+                                <li className='nav-item nav-button'>
                                     <ModalContainer triggerText={"Login"} />
                                 </li>
-                                <li className='nav-item'>
+                                <li className='nav-item nav-button col'>
                                     <ModalContainer triggerText={"Sign Up"} />
                                 </li>
                             </>
@@ -102,13 +108,9 @@ const NavBar = (props) => {
                     </ul>
                 </div>
             </nav>
-            <div className="d-flex flex-wrap justify-content-around overflow-auto">
+            <div className="d-flex flex-wrap justify-content-around overflow-auto" id="search-results">
                 {results ? results.map((result) => <ResultCard setActive={setActive} setResults={setResults} title={result.recipe.label} source={result.recipe.source} imageUrl={result.recipe.image} key={getRecipeId(result.recipe.uri)} edamam_id={getRecipeId(result.recipe.uri)} />) : null}
             </div>
-            {active ? (<button onClick={(e) => {
-                setActive(false);
-                setResults([]);
-            }} className="btn btn-md btn-danger center align-self-start mt-5" id="close-search">Close Search</button>) : null}
         </div>
     );
 };

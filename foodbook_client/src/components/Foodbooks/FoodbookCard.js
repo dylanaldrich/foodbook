@@ -17,7 +17,7 @@ const FoodbookCard = ({foodbook, findProfile, profileId}) => {
     
     return(
         <>
-        <div className="card mb-3 shadow" style={{width: "18rem"}}>
+        <div className="card mb-3 shadow foodbook-card" style={{width: "18rem"}}>
             <div className="card-body">
                 <Link to={`/foodbook/${foodbook._id}`}>
                     <h5 className="card-title">{foodbook.name}</h5>

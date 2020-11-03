@@ -86,27 +86,29 @@ const RecipeDetail = (props) => {
             {console.log("userRecipe", userRecipe)}
             {/* Banner */}
             {error && <p style={{ color: "red" }}>{error}</p>}
-            <div className="container d-flex text-white rounded bg-dark top-banner">
-                <img className="card-img-left flex-auto d-none d-md-block"  src={recipe.image} alt={recipe.label} />
-                <div className="col-md-6 px-0 d-flex">
-                    <h1 className="display-4 mr-auto">{recipe.label}</h1>
+            <div className="container d-flex text-white rounded bg-dark top-banner justify-content-between align-items-end">
+                <img className="card-img-left flex-auto d-none d-md-block" src={recipe.image} alt={recipe.label} />
+                <div className="col px-0 d-flex">
+                    <h1 className="display-4 ml-2 col-10 text-left">{recipe.label}</h1>
+                    {/* Add or Edit button */}
+                    <div className="float-right ml-auto align-self-end">
+                        {isSaved && userRecipe.name ? <ModalContainer 
+                            triggerText={"Edit Recipe"} 
+                            recipeType={userRecipe.recipe_type} 
+                            savedFoodbooks={userRecipe.foodbooks} 
+                            recipeName={userRecipe.name} 
+                            edamam_id={userRecipe.edamam_id} 
+                            findOneRecipe={findOneRecipe} 
+                            /> 
+                            : <ModalContainer 
+                            triggerText={"Save Recipe"} 
+                            recipeName={recipe.label} 
+                            edamam_id={props.match.params.id} 
+                            findOneRecipe={findOneRecipe} 
+                            /> 
+                        }
+                    </div>
                 </div>
-                {/* Add or Edit button */}
-                {isSaved && userRecipe.name ? <ModalContainer 
-                    triggerText={"Edit Recipe"} 
-                    recipeType={userRecipe.recipe_type} 
-                    savedFoodbooks={userRecipe.foodbooks} 
-                    recipeName={userRecipe.name} 
-                    edamam_id={userRecipe.edamam_id} 
-                    findOneRecipe={findOneRecipe} 
-                    /> 
-                    : <ModalContainer 
-                    triggerText={"Save Recipe"} 
-                    recipeName={recipe.label} 
-                    edamam_id={props.match.params.id} 
-                    findOneRecipe={findOneRecipe} 
-                    /> 
-                }
             </div>
             {/* Banner End */}
             
