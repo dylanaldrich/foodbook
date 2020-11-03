@@ -158,3 +158,15 @@ svg, rect {
 .remove-recipe-btn:hover {
   transform: scale(1.2);
 }
+
+#copyright {
+  margin: 0 auto;
+  text-align: left;
+  padding: 5px;
+}
+
+footer {
+  position: absolute;
+  bottom: -70px;
+  min-width: 172px;
+}

@@ -4,7 +4,7 @@ import UserModel from '../../models/UserModel';
 import { useRecoilState } from "recoil";
 import { userState } from "../../recoil/atoms";
 
-export const EditUserForm = ({closeModal}) => {
+export const EditUserForm = ({closeModal, profileId, findProfile}) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [user, setUser] = useRecoilState(userState);
@@ -13,22 +13,18 @@ export const EditUserForm = ({closeModal}) => {
     useEffect(function () {
         if(localStorage.getItem('uid')) {
             UserModel.show().then((response) => {
-                console.log(response.data);
                 setUser(response.data);
                 setUsername(response.data.username);
                 setEmail(response.data.email);
             });
         }
     }, []);
-
-    console.log(user);
     
     function handleSubmit(event) {
         event.preventDefault();
         UserModel.update({username, email}).then((response) => {
-        console.log("Update response:", response);
         if(response.status === 200) {
-            console.log("Update success");
+            findProfile(profileId);
             closeModal();
         } else {
             setError(response.message);

@@ -54,10 +54,12 @@ const Profile = (props) => {
                             <h1 className="display-4 mr-auto">{user.username}'s Profile</h1>
                         </div>
                         {/* this button will become a modal trigger for profile edit form */}
-                        <ModalContainer triggerText={"Edit Profile"} />
+                        <ModalContainer 
+                            triggerText={"Edit Profile"}
+                            findProfile={findProfile} profileId={props.match.params.id} />
                     </div>
                     <div className="page-header container">
-                        <h2 className="text-left pt-2 font-weight-bold">My foodbooks <ModalContainer triggerText={"Create a foodbook"} findProfile={findProfile} /></h2>
+                        <h2 className="text-left pt-2 font-weight-bold">My foodbooks <ModalContainer triggerText={"Create a foodbook"} findProfile={findProfile} profileId={props.match.params.id} /></h2>
                         <hr />
                     </div>
                     <div className="container">

@@ -60,13 +60,13 @@ const NavBar = (props) => {
 
     return (
         <div className={`navbar ${active ? "navbar-active overflow-auto" : ""}`}>
-            <nav class='navbar navbar-expand-md navbar-dark fixed-top bg-dark navbar__titles'>
-                <NavLink className='navbar-brand' to='/'>foodbook</NavLink>
+            <nav class='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
+                <NavLink className='navbar-brand navbar__titles' to='/'>foodbook</NavLink>
                 <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarCollapse' aria-controls='navbarCollapse' aria-expanded='false' aria-label='Toggle navigation'>
                 <span className='navbar-toggler-icon'></span>
                 </button>
                 <div className='collapse navbar-collapse' id='navbarCollapse'>
-                    <form className='form-inline mt-2 mt-md-0'>
+                    <form className='form-inline mt-2 mt-md-0 align-item-start'>
                         <input 
                             className='form-control mr-sm-2' 
                             type='text' 
@@ -83,7 +83,7 @@ const NavBar = (props) => {
                         {user ? (
                             <>
                                 <li className='nav-item active'>
-                                    <NavLink className='nav-link' to={`/profile/${user._id}`}>My Profile</NavLink>
+                                    <NavLink className='nav-link' id="profile-link" to={`/profile/${user._id}`}>My Profile</NavLink>
                                 </li>
                                 <li className='nav-item active nav-link' onClick={logout}>
                                     Logout

@@ -54,6 +54,7 @@ export class ModalContainer extends Component {
                         recipeType={this.props.recipeType} 
                         savedFoodbooks={this.props.foodbooks}
                         findProfile={this.props.findProfile}
+                        profileId={this.props.profileId}
                     />
                 ) : null}
             </>

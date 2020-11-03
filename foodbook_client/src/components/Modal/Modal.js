@@ -24,6 +24,7 @@ export const Modal = ({
     recipeType,
     savedFoodbooks,
     findProfile,
+    profileId,
     }) => {
 
     function setForm (triggerText) {
@@ -46,11 +47,22 @@ export const Modal = ({
                 recipeType={recipeType}
             />);
         } else if (triggerText === "Edit Profile") {
-            return (<EditUserForm closeModal={closeModal} />);
+            return (<EditUserForm 
+                findProfile={findProfile}
+                profileId={profileId}
+                closeModal={closeModal} 
+            />);
         } else if (triggerText === "Create a foodbook") {
-            return (<AddFoodbookForm closeModal={closeModal} findProfile={findProfile} />);
+            return (<AddFoodbookForm 
+                closeModal={closeModal} 
+                findProfile={findProfile}
+                profileId={profileId} 
+            />);
         } else if (triggerText === "Edit foodbook") {
-            return (<EditFoodbookForm closeModal={closeModal} foodbookId={foodbookId} />);
+            return (<EditFoodbookForm 
+                closeModal={closeModal} 
+                foodbookId={foodbookId} 
+            />);
         } 
     };
 

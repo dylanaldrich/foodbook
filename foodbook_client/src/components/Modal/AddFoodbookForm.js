@@ -1,30 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import FoodbookModel from '../../models/FoodbookModel';
-import UserModel from '../../models/UserModel';
 
-import { useRecoilState } from "recoil";
-import { userState } from "../../recoil/atoms";
-
-
-export const AddFoodbookForm = ({closeModal, findProfile}) => {
+export const AddFoodbookForm = ({closeModal, findProfile, profileId}) => {
     const [name, setName] = useState("");
     const [error, setError] = useState('');
-    const [user, setUser] = useRecoilState(userState);
 
-    useEffect(function () {
-        if(localStorage.getItem('uid')) {
-            UserModel.show().then((response) => {
-                console.log(response.data);
-                setUser(response.data);
-            });
-        }
-    }, []);
-    
+
     function handleSubmit(event) {
         event.preventDefault();
         FoodbookModel.create({name}).then((response) => {
             if(response.status === 201) {
-                findProfile(user._id);
+                findProfile(profileId);
                 closeModal();
             } else {
                 setError(response.message);
