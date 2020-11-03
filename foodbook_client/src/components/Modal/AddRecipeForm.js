@@ -7,7 +7,7 @@ import { useRecoilState } from "recoil";
 import { userState } from "../../recoil/atoms";
 
 export const AddRecipeForm = ({closeModal, recipeName, edamam_id}) => {    
-    const [recipe_type, setRecipeType] = useState("");
+    const [recipe_type, setRecipeType] = useState("entree");
     const [allFoodbooks, setAllFoodbooks] = useState([]);
     const [user, setUser] = useRecoilState(userState);
     const [selectedFoodbooks, setSelectedFoodbooks] = useState([]);
@@ -27,7 +27,7 @@ export const AddRecipeForm = ({closeModal, recipeName, edamam_id}) => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        RecipeModel.create({recipe_type, foobooksIds: selectedFoodbooks, name: recipeName, edamam_id}).then((response) => {
+        RecipeModel.create({recipe_type, foodbooksIds: selectedFoodbooks, name: recipeName, edamam_id}).then((response) => {
         console.log("Create recipe response:", response);
         if(response.status === 201) {
             console.log("Recipe created successfully");
@@ -67,6 +67,7 @@ export const AddRecipeForm = ({closeModal, recipeName, edamam_id}) => {
             <div className="form-group text-center">
             <label htmlFor="recipe_type">Recipe type</label>
                     <select className="ml-2" name="recipe_type" onChange={(e) => setRecipeType(e.target.value)}>
+                        <option value="" className="text-italic text-muted">Select...</option>
                         <option value="entree">Entrée</option>
                         <option value="appetizer">Appetizer/Snack</option>
                         <option value="side">Side Dish</option>
