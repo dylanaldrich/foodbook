@@ -21,7 +21,7 @@ const Home = (props) => {
             <div className='container justify-content-start'>
                 <div class='row featurette align-items-center'>
                     <div class='col-md-3'>
-                        <img class='bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto mt-4' width='250' src='https://i.ibb.co/WzLBZCp/foodbook-search.png' alt="Search image"></img>
+                        <img class='bd-placeholder-img bd-placeholder-img-lg featurette-image border border-dark img-fluid mx-auto mt-4' width='250' src='https://i.ibb.co/WzLBZCp/foodbook-search.png' alt="Search image"></img>
                     </div>
                     <div class='col-md-8 text-left'>
                         <h2 class='featurette-heading'>Step 1: Search for a recipe thats interests you.</h2>
@@ -30,7 +30,7 @@ const Home = (props) => {
                 </div>
                 <div class='row featurette align-items-center'>
                     <div class='col-md-3'>
-                        <img class='bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto mt-4' width='250' src='https://i.ibb.co/TK0FF6y/foodbook-recipesave.png' alt="Recipe save image"></img>
+                        <img class='bd-placeholder-img bd-placeholder-img-lg featurette-image border border-dark img-fluid mx-auto mt-4' width='250' src='https://i.ibb.co/TK0FF6y/foodbook-recipesave.png' alt="Recipe save image"></img>
                     </div>
                     <div class='col-md-8 text-left'>
                         <h2 class='featurette-heading'>Step 2: Do you want to save a recipe and try it out?</h2>
@@ -39,7 +39,7 @@ const Home = (props) => {
                 </div>
                 <div class='row featurette align-items-center'>
                     <div class='col-md-3'>
-                        <img class='bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto mt-4' width='250' src='https://i.ibb.co/Jz7V8Sk/foodbook-create.png' alt="Foodbook create image"></img>
+                        <img class='bd-placeholder-img bd-placeholder-img-lg featurette-image border border-dark img-fluid mx-auto mt-4' width='250' src='https://i.ibb.co/Jz7V8Sk/foodbook-create.png' alt="Foodbook create image"></img>
                     </div>
                     <div class='col-md-8 text-left'>
                         <h2 class='featurette-heading'>Step 3: Need to create a foodbook?</h2>
