@@ -200,3 +200,16 @@ footer {
   padding: 65px 0 0 0;
   background-color: rgb(23,162,184);
 }
+
+#foodbook-tag{
+  line-height: 1;;
+}
+
+.socials{
+  color:white;
+}
+
+.socials:hover{
+  text-decoration: none;
+  color: rgb(23,162,184);
+}
