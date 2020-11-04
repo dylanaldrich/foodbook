@@ -84,7 +84,6 @@ const RecipeDetail = (props) => {
         <>
         {recipe.image ? 
             <>
-            {console.log("userRecipe", userRecipe)}
             {/* Banner */}
             {error && <p style={{ color: "red" }}>{error}</p>}
             <div className="container d-flex text-white rounded bg-dark top-banner justify-content-between align-items-end">

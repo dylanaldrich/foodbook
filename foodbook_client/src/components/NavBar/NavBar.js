@@ -44,10 +44,8 @@ const NavBar = (props) => {
     };
     
     function fetchRecipes (query) {
-        console.log("query when search begins", query);
         SearchModel.searchRecipes(query)
             .then((response) => {
-                console.log("response after aPI hit:", response);
                 setResults(response.searchResults.hits);
             })
             .catch((error) => {

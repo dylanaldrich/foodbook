@@ -53,9 +53,8 @@ class RecipeModel {
         .then(response => response.json());
     };
 
-    // remove
+    // remove recipe from one foodbook
     static remove = (recipeId, foodbookId) => {
-        console.log(recipeId, foodbookId);
         return fetch(`${URL}/${recipeId}/${foodbookId}`, {
             method: "POST",
             headers: {

@@ -8,11 +8,12 @@ import UserModel from '../../models/UserModel';
 import { useRecoilState } from "recoil";
 import { userState } from "../../recoil/atoms";
 
-export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, savedFoodbooks, savedRecipeId}) => {    
+export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, savedRecipeId}) => {    
     const [recipe_type, setRecipeType] = useState(recipeType);
     const [allFoodbooks, setAllFoodbooks] = useState([]);
     const [user, setUser] = useRecoilState(userState);
     const [selectedFoodbooks, setSelectedFoodbooks] = useState([]);
+    const [preSelectedFoodbooks, setPreSelectedFoodbooks] = useState([]);
     const [error, setError] = useState('');
 
     useEffect(function () {
@@ -27,12 +28,21 @@ export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, s
         }
     }, []);
 
-    console.log("recipeType: ", recipeType);
-    console.log("savedFoodbooks: ", savedFoodbooks);
+    useEffect(function() {
+        if(preSelectedFoodbooks) {
+            setSelectedFoodbooks(preSelectedFoodbooks);
+        }
+    }, [preSelectedFoodbooks]);
+
+    useEffect(function() {
+        if(recipe_type) {
+            preSelectRecipeType(document.getElementById("recipeTypeDropdown"), recipe_type);
+        }
+    }, [recipe_type]);
 
     async function fetchRecipeFoodbooks () {
-        await RecipeModel.show(savedRecipeId).then(response => {
-            console.log("recipe show response:", response);
+        await RecipeModel.show(savedRecipeId).then(async response => {
+            setPreSelectedFoodbooks(response.foundRecipe.foodbooks);
         });
     };
 
@@ -60,22 +70,40 @@ export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, s
         }
     }
 
-    const generateCheckbox = allFoodbooks ? allFoodbooks.map((foodbook) => {
-        // Handle the logic if foodbook is in selectedFoodbooks array, return a checked checkbox, else uncheck 
+    const generateCheckbox = allFoodbooks && preSelectedFoodbooks ? allFoodbooks.map((foodbook) => {
+        // Handle the logic if foodbook is in selectedFoodbooks array, return a checked checkbox, else uncheck
+        if(preSelectedFoodbooks.some(index => index === foodbook._id)) {
+            selectedFoodbooks.concat([foodbook._id]);
+            return <li className="mx-auto">
+                <label htmlFor="name">{foodbook.name}</label> 
+                <input type="checkbox" checked onChange={handleChange}  className="ml-2" name={`foodbook_${foodbook._id}`} value={foodbook._id} key={foodbook._id} />
+            </li>;
+        }
+
         return <li className="mx-auto">
         <label htmlFor="name">{foodbook.name}</label> 
-        <input type="checkbox" checked onChange={handleChange}  className="ml-2" name={`foodbook_${foodbook._id}`} value={foodbook._id} key={foodbook._id} />
+        <input type="checkbox" onChange={handleChange}  className="ml-2" name={`foodbook_${foodbook._id}`} value={foodbook._id} key={foodbook._id} />
         </li>;
     }) : null;
 
-    // console.log("value", value);
+    /* Adapted from: https://www.daftlogic.com/information-programmatically-preselect-dropdown-using-javascript.htm */
+    // preselect the value of the dropdown menu to match the recipe's type, as previously saved
+    function preSelectRecipeType(menu, type) {
+        for (let i = 0; i < menu.options.length; i++) { 
+            if (menu.options[i].value == type) {
+                menu.options[i].selected = true;
+                break;
+            }
+        }
+        return;
+    }
 
     return (
         <form onSubmit={handleSubmit}>
             {error && <p style={{ color: "red" }}>{error}</p>} 
             <div className="form-group text-center">
             <label htmlFor="recipe_type">Recipe type</label>
-                    <select className="ml-2" name="recipe_type" onChange={(e) => setRecipeType(e.target.value)}>
+                    <select className="ml-2" id="recipeTypeDropdown" name="recipe_type" onChange={(e) => setRecipeType(e.target.value)}>
                         <option value="" className="text-italic text-muted">Select...</option>
                         <option value="entree">Entrée</option>
                         <option value="appetizer">Appetizer/Snack</option>
@@ -90,7 +118,7 @@ export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, s
             <div className="form-group text-center">
                 <h5>Foodbooks:</h5> 
                 <ul className="d-flex flex-wrap list-unstyled">
-                    { generateCheckbox}
+                    {generateCheckbox}
                 </ul>
             </div>
 

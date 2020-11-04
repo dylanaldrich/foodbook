@@ -8,7 +8,6 @@ const FoodbookCard = ({foodbook, findProfile, profileId}) => {
     useEffect(() => {
         setState({});
     }, [foodbook]);
-    // TODO figure out how to make the foodbook card rerender when a recipe is removed
     
     function handleRecipeRemove(recipeId) {
         RecipeModel.remove(recipeId, foodbook._id)

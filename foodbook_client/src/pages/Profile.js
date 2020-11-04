@@ -4,9 +4,7 @@ import { useRecoilState } from "recoil";
 
 import ModalContainer from '../components/Modal/ModalContainer';
 import FoodbooksContainer from '../components/Foodbooks/FoodbooksContainer';
-// import Link from 'react-router-dom';
 import UserModel from '../models/UserModel';
-import FoodbookModel from '../models/FoodbookModel';
 import { userState } from "../recoil/atoms";
 
 import '../App.css';
