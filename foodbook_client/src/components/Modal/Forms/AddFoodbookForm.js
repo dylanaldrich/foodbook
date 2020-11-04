@@ -1,10 +1,11 @@
+/* imports */
 import React, {useState, useEffect} from 'react';
-import FoodbookModel from '../../models/FoodbookModel';
+import FoodbookModel from '../../../models/FoodbookModel';
 
+/* Add Foodbook Form Component */
 export const AddFoodbookForm = ({closeModal, findProfile, profileId}) => {
     const [name, setName] = useState("");
     const [error, setError] = useState('');
-
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -42,6 +43,3 @@ export const AddFoodbookForm = ({closeModal, findProfile, profileId}) => {
 };
 
 export default AddFoodbookForm;
-
-
-// Adapted from: https://blog.bitsrc.io/build-a-full-featured-modal-dialog-form-with-react-651dcef6c571

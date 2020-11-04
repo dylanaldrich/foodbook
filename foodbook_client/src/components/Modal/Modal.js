@@ -1,17 +1,21 @@
+/* imports */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FocusTrap from 'focus-trap-react';
 
 /* Forms */
-import RegisterForm from './RegisterForm';
-import LoginForm from './LoginForm';
-import AddRecipeForm from './AddRecipeForm';
-import AddFoodbookForm from './AddFoodbookForm';
-import EditRecipeForm from './EditRecipeForm';
-import EditUserForm from './EditUserForm';
-import EditFoodbookForm from './EditFoodbookForm';
+import RegisterForm from './Forms/RegisterForm';
+import LoginForm from './Forms/LoginForm';
+import AddRecipeForm from './Forms/AddRecipeForm';
+import AddFoodbookForm from './Forms/AddFoodbookForm';
+import EditRecipeForm from './Forms/EditRecipeForm';
+import EditUserForm from './Forms/EditUserForm';
+import EditFoodbookForm from './Forms/EditFoodbookForm';
 
+
+/* Modal Component */
 export const Modal = ({
+    // destructured props:
     onClickOutside,
     onKeyDown,
     modalRef,
@@ -30,6 +34,7 @@ export const Modal = ({
     savedRecipeId,
     }) => {
 
+    // determine which form to render inside modal
     function setForm (triggerText) {
         if (triggerText === 'Sign Up') {
             return (<RegisterForm closeModal={closeModal} />);
@@ -72,6 +77,7 @@ export const Modal = ({
         } 
     };
 
+    // create Focus Trap: locks background when modal is open and in focus
     return ReactDOM.createPortal(
         <FocusTrap>
             <aside
@@ -109,6 +115,5 @@ export const Modal = ({
 };
 
 export default Modal;
-
 
 // Source: https://blog.bitsrc.io/build-a-full-featured-modal-dialog-form-with-react-651dcef6c571

@@ -1,12 +1,14 @@
+/* imports */
 import React, {useState} from 'react';
 import { useSetRecoilState } from "recoil";
-import { userState } from "../../recoil/atoms";
 import {useHistory} from 'react-router-dom';
 
-import AuthModel from '../../models/AuthModel';
-import UserModel from '../../models/UserModel';
+import AuthModel from '../../../models/AuthModel';
+import UserModel from '../../../models/UserModel';
+import { userState } from "../../../recoil/atoms";
 
 
+/* Login Form Component */
 export const LoginForm = ({closeModal}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -67,6 +69,3 @@ export const LoginForm = ({closeModal}) => {
 };
 
 export default LoginForm;
-
-
-// Adapted from: https://blog.bitsrc.io/build-a-full-featured-modal-dialog-form-with-react-651dcef6c571

@@ -1,9 +1,12 @@
+/* imports */
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 
 import './TriggerButton.css';
 
+
+/* Trigger Button Component */
 const TriggerButton = ({ triggerText, buttonRef, showModal}) => {    
+    // renders different type of trigger button for modals that live in the navbar
     if(triggerText === "Login" || triggerText === "Sign Up") {
         return (
             <div 
@@ -26,6 +29,7 @@ const TriggerButton = ({ triggerText, buttonRef, showModal}) => {
         </button>
     );
 };
+
 export default TriggerButton;
 
 // Source: https://blog.bitsrc.io/build-a-full-featured-modal-dialog-form-with-react-651dcef6c571

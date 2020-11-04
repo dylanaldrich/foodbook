@@ -15,7 +15,7 @@ const Home = (props) => {
             <div className='container justify-content-start'>
                 <div class='row featurette align-items-center'>
                     <div class='col-md-3'>
-                        <img class='bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto mt-4' width='250' src='https://i.ibb.co/GvGQHtw/foodbook-search.png' alt="Search image"></img>
+                        <img class='bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto mt-4' width='250' src='https://i.ibb.co/WzLBZCp/foodbook-search.png' alt="Search image"></img>
                     </div>
                     <div class='col-md-8 text-left'>
                         <h2 class='featurette-heading'>Step 1: Search for a recipe thats interests you.</h2>

@@ -67,12 +67,16 @@ const NavBar = (props) => {
                 <span className='navbar-toggler-icon'></span>
                 </button>
                 <div className='collapse navbar-collapse' id='navbarCollapse'>
-                    {active ? (<button onClick={(e) => {
-                        setActive(false);
-                        setQuery("");
-                        setResults([]);
-                    }} className="btn btn-md btn-info mx-2"><i class="fas fa-times"></i></button>) : null}
-                    <form className='form-inline mt-2 mt-md-0 p2 align-item-start'>
+                    <form className='form-inline mt-2 mt-md-0 p2 justify-content-end'>
+                        {active ? (
+                            <div className="position-absolute mr-2">
+                                <button onClick={(e) => {
+                                    setActive(false);
+                                    setQuery("");
+                                    setResults([]);
+                                }} className="btn btn-md btn-info justify-content-center rounded-circle" id="x-btn"><i class="fas fa-times"></i></button>
+                            </div>
+                        ) : null}
                         <input 
                             className='form-control mr-sm-2' 
                             type='text' 
@@ -108,7 +112,7 @@ const NavBar = (props) => {
                     </ul>
                 </div>
             </nav>
-            <div className="d-flex container flex-wrap justify-content-around overflow-auto" id="search-results">
+            <div className="d-flex container flex-wrap justify-content-around align-items-start overflow-auto" id="search-results">
                 {results ? results.map((result) => <ResultCard setActive={setActive} setResults={setResults} title={result.recipe.label} source={result.recipe.source} imageUrl={result.recipe.image} key={getRecipeId(result.recipe.uri)} edamam_id={getRecipeId(result.recipe.uri)} />) : null}
             </div>
         </div>

@@ -1,6 +1,10 @@
+/* imports */
 import React, {useState} from 'react';
-import AuthModel from '../../models/AuthModel';
 
+import AuthModel from '../../../models/AuthModel';
+
+
+/* Register Form Component */
 export const RegisterForm = ({closeModal}) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -10,9 +14,7 @@ export const RegisterForm = ({closeModal}) => {
   function handleSubmit(event) {
     event.preventDefault();
     AuthModel.register({username, email, password}).then((response) => {
-      console.log("Register response:", response);
-      if(response.status === 201) { // status code 201 means OK, successful
-        console.log("Register success");
+      if(response.status === 201) {
         closeModal();
       } else {
         setError(response.message);
@@ -64,7 +66,5 @@ export const RegisterForm = ({closeModal}) => {
     </form>
   );
 };
+
 export default RegisterForm;
-
-
-// Source: https://blog.bitsrc.io/build-a-full-featured-modal-dialog-form-with-react-651dcef6c571

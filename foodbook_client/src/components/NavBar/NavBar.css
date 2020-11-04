@@ -44,3 +44,19 @@ nav {
 #search-results{
     margin-top: 60px;
 }
+
+.fa-times {
+    position: absolute;
+    font-size: 23px;
+    line-height: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#x-btn{
+    height: 32px;
+    width: 32px;
+    position: relative;
+    margin-right: 3px;
+}

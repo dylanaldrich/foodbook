@@ -1,7 +1,11 @@
+/* imports */
 import React, { Component } from 'react';
+
 import { Modal } from './Modal';
 import TriggerButton from './TriggerButton';
 
+
+/* Modal Container Component */
 export class ModalContainer extends Component {
     state = { isShown: false };
     showModal = () => {

@@ -1,11 +1,13 @@
+/* imports */
 import React, {useState, useEffect} from 'react';
-
-import RecipeModel from '../../models/RecipeModel';
-import UserModel from '../../models/UserModel';
-
 import { useRecoilState } from "recoil";
-import { userState } from "../../recoil/atoms";
 
+import RecipeModel from '../../../models/RecipeModel';
+import UserModel from '../../../models/UserModel';
+import { userState } from "../../../recoil/atoms";
+
+
+/* Add Recipe Form Component */
 export const AddRecipeForm = ({closeModal, recipeName, edamam_id, findOneRecipe, currentRecipeId}) => {    
     const [recipe_type, setRecipeType] = useState("entree");
     const [allFoodbooks, setAllFoodbooks] = useState([]);
@@ -16,10 +18,8 @@ export const AddRecipeForm = ({closeModal, recipeName, edamam_id, findOneRecipe,
     useEffect(function () {
         if(localStorage.getItem('uid')) {
             UserModel.show().then((response) => {
-                console.log("response to user show", response);
                 setUser(response.data);
                 setAllFoodbooks(response.foodbooks);
-                console.log("allFoodbooks", allFoodbooks);
             });
         }
     }, []);
@@ -28,9 +28,7 @@ export const AddRecipeForm = ({closeModal, recipeName, edamam_id, findOneRecipe,
     function handleSubmit(event) {
         event.preventDefault();
         RecipeModel.create({recipe_type, foodbooksIds: selectedFoodbooks, name: recipeName, edamam_id}).then((response) => {
-        console.log("Create recipe response:", response);
         if(response.status === 201) {
-            console.log("Recipe created successfully");
             findOneRecipe(currentRecipeId);
             closeModal();
         } else {
@@ -40,7 +38,6 @@ export const AddRecipeForm = ({closeModal, recipeName, edamam_id, findOneRecipe,
     };
 
     function handleChange(e) {
-        console.log("e.target.type, name, value:", e.target.type, e.target.name, e.target.value);
         if(selectedFoodbooks.includes(e.target.value)) {
             setSelectedFoodbooks(selectedFoodbooks.filter(foodbook => {
                 return foodbook !== e.target.value;
@@ -48,10 +45,7 @@ export const AddRecipeForm = ({closeModal, recipeName, edamam_id, findOneRecipe,
         } else {
             setSelectedFoodbooks([...selectedFoodbooks, e.target.value]);
         }
-    }
-
-    console.log("recipeName", recipeName);
-    console.log("edamam_id", edamam_id);
+    };
 
     const generateCheckbox = allFoodbooks ? allFoodbooks.map((foodbook) => {
         return <li className="mx-auto">
@@ -59,8 +53,6 @@ export const AddRecipeForm = ({closeModal, recipeName, edamam_id, findOneRecipe,
         <input type="checkbox" onChange={handleChange}  className="ml-2" name={`foodbook_${foodbook._id}`} value={foodbook._id} key={foodbook._id} />
         </li>;
     }) : null;
-
-    // console.log("value", value);
 
     return (
         <form onSubmit={handleSubmit}>
@@ -97,6 +89,3 @@ export const AddRecipeForm = ({closeModal, recipeName, edamam_id, findOneRecipe,
 };
 
 export default AddRecipeForm;
-
-
-// // Adapted from: https://blog.bitsrc.io/build-a-full-featured-modal-dialog-form-with-react-651dcef6c571

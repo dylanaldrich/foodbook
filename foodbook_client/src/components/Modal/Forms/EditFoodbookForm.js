@@ -1,12 +1,14 @@
+/* imports */
 import React, {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
-
-import FoodbookModel from '../../models/FoodbookModel';
-import UserModel from '../../models/UserModel';
-
 import { useRecoilState } from "recoil";
-import { userState } from "../../recoil/atoms";
 
+import FoodbookModel from '../../../models/FoodbookModel';
+import UserModel from '../../../models/UserModel';
+import { userState } from "../../../recoil/atoms";
+
+
+/* Edit Foodbook Form Component */
 export const EditFoodbookForm = ({foodbookId ,closeModal}) => {
     const [name, setName] = useState("");
     const [foodbook, setFoodbook] = useState({});
@@ -57,32 +59,28 @@ export const EditFoodbookForm = ({foodbookId ,closeModal}) => {
     
     return (
         <>
-        <form onSubmit={handleSubmit}>
-            {/* {fetchFoodbook(foodbookId)} */}
-            {error && <p style={{ color: "red" }}>{error}</p>} 
+            <form onSubmit={handleSubmit}>
+                {error && <p style={{ color: "red" }}>{error}</p>} 
+                <div className="form-group">
+                    <label htmlFor="name">Name</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="name"
+                        name='name'
+                        onChange={(e) => setName(e.target.value)}
+                        value={name}
+                    />
+                </div>
+                <div className="form-group">
+                    <button className="form-control btn btn-primary" type="submit">Submit</button>
+                </div>
+            </form>
             <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="name"
-                    name='name'
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                />
+                <button className="form-control btn btn-danger" onClick={deleteFoodbook}>Delete Foodbook</button>
             </div>
-            <div className="form-group">
-                <button className="form-control btn btn-primary" type="submit">Submit</button>
-            </div>
-        </form>
-        <div className="form-group">
-            <button className="form-control btn btn-danger" onClick={deleteFoodbook}>Delete Foodbook</button>
-        </div>
         </>
     );
 };
 
 export default EditFoodbookForm;
-
-
-// Adapted from: https://blog.bitsrc.io/build-a-full-featured-modal-dialog-form-with-react-651dcef6c571

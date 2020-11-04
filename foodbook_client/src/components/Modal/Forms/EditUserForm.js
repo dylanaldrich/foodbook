@@ -1,9 +1,12 @@
+/* imports */
 import React, {useState, useEffect} from 'react';
-import UserModel from '../../models/UserModel';
-
 import { useRecoilState } from "recoil";
-import { userState } from "../../recoil/atoms";
 
+import UserModel from '../../../models/UserModel';
+import { userState } from "../../../recoil/atoms";
+
+
+/* Edit User Form Component */
 export const EditUserForm = ({closeModal, profileId, findProfile}) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -43,7 +46,6 @@ export const EditUserForm = ({closeModal, profileId, findProfile}) => {
                 name='username' 
                 onChange={(e) => setUsername(e.target.value)}
                 value={username}
-                // placeholder={user.username}
                 />
             </div>
             <div className="form-group">
@@ -56,18 +58,15 @@ export const EditUserForm = ({closeModal, profileId, findProfile}) => {
                 placeholder="name@example.com"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
-                // placeholder={user.email}
                 />
             </div>
             <div className="form-group">
                 <button className="form-control btn btn-primary" type="submit">
-                Submit
+                    Submit
                 </button>
             </div>
         </form>
     );
 };
+
 export default EditUserForm;
-
-
-// Source: https://blog.bitsrc.io/build-a-full-featured-modal-dialog-form-with-react-651dcef6c571
