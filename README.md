@@ -2,7 +2,7 @@
 A place to find and store your favorite recipes
 
 ## MVP Pitch
-Foodies and chefs the world over are always looking for the best recipes, and trying new ones they find here and there. But where can you really keep all those recipes organized? Sure, you can bookmark them, but once you've bookmarked hundreds of recipes, it becomes pretty hard remember which is which and to find the one you want. That's where foodbook comes in! Users can search through a database of millions of recipes and then choose to save their favorites into customizable "foodbooks" of their own, making it that much easier to get cooking! Anyone can search through foodbook's recipes database, but only a registered user has access to our full functionality. In order to save recipes and create your own foodbooks, just sign up for an account and you're ready to go. foodbook uses a third-party API to serve data about millions of recipes from sources all over the internet.
+Foodies and chefs the world over are always looking for the best recipes, and trying new ones they find here and there. But where can you really keep all those recipes organized? Sure, you can bookmark them, but once you've bookmarked hundreds of recipes, it becomes pretty to hard remember which is which and where to find the one you want. That's where foodbook comes in! Users can search through a database of millions of recipes and then choose to save their favorites into customizable "foodbooks" of their own, making it that much easier to get cooking! Anyone can search through foodbook's recipes database, but only a registered user has access to our full functionality. In order to save recipes and create your own foodbooks, just sign up for an account and you're ready to go. foodbook uses a third-party API to serve data about millions of recipes from sources all over the internet.
 
 ## User Stories
 
@@ -56,3 +56,4 @@ A user can click on any of their foodbooks from their profile page and be redire
 3. Recipes index page (to see all)?
 4. Filter feature on foodbook detail page, user can click a recipe type (all (default), entree, dessert, side, etc.) and the page will then only display recipes matching that type from the current foodbook
 5. Pagination for search results/saved recipes
+6. Attach an ADD button directly to search results cards so user can add it to their foodbook(s) without navigating to the recipe show page
