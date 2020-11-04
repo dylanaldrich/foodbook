@@ -61,7 +61,7 @@ const NavBar = (props) => {
     return (
         <div className={`navbar ${active ? "navbar-active overflow-auto" : ""}`}>
             <nav class='navbar navbar-expand-md navbar-dark fixed-top bg-dark d-flex'>
-                <img className="mr-1" src="https://i.ibb.co/YP9SC9N/foodbook-favicon.png" alt="foodbook-logo" height="55"/>
+            <NavLink to='/'><img className="mr-1" src="https://i.ibb.co/YP9SC9N/foodbook-favicon.png" alt="foodbook-logo" height="55"/></NavLink>
                 <NavLink className='navbar-brand navbar__titles' to='/'>foodbook</NavLink>
                 <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarCollapse' aria-controls='navbarCollapse' aria-expanded='false' aria-label='Toggle navigation'>
                 <span className='navbar-toggler-icon'></span>
