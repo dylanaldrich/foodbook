@@ -1,16 +1,18 @@
+/* imports */
 import React, {useState, useEffect} from 'react';
 import {NavLink, useHistory} from 'react-router-dom';
+import { useRecoilState } from "recoil";
 
 import ModalContainer from '../Modal/ModalContainer';
 import SearchModel from '../../models/SearchModel';
 import ResultCard from '../Results/ResultCard';
 import UserModel from '../../models/UserModel';
-
-import { useRecoilState } from "recoil";
 import { userState } from "../../recoil/atoms";
 
 import './NavBar.css';
 
+
+/* NavBar Component */
 const NavBar = (props) => {
     const [active, setActive] = useState(false);
     const [results, setResults] = useState([]);
@@ -49,24 +51,27 @@ const NavBar = (props) => {
                 setResults(response.searchResults.hits);
             })
             .catch((error) => {
-                console.log(error);
                 return <p>Sorry, that search didn't work. Please try again.</p>;
             });
     };
 
     function getRecipeId (string) {
         return string.split("recipe_")[1];
-    }
+    };
 
     return (
         <div className={`navbar ${active ? "navbar-active overflow-auto" : ""}`}>
             <nav class='navbar navbar-expand-md navbar-dark fixed-top bg-dark d-flex'>
+            
+            {/* Logo and brand */}
             <NavLink to='/'><img className="mr-1" src="https://i.ibb.co/YP9SC9N/foodbook-favicon.png" alt="foodbook-logo" height="55"/></NavLink>
                 <NavLink className='navbar-brand navbar__titles' to='/'>foodbook</NavLink>
                 <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarCollapse' aria-controls='navbarCollapse' aria-expanded='false' aria-label='Toggle navigation'>
                 <span className='navbar-toggler-icon'></span>
                 </button>
                 <div className='collapse navbar-collapse' id='navbarCollapse'>
+                    
+                    {/* Search Bar */}
                     <form className='form-inline mt-2 mt-md-0 p2 justify-content-end'>
                         {active ? (
                             <div className="position-absolute mr-2">
@@ -86,10 +91,14 @@ const NavBar = (props) => {
                             onChange={(e) => setQuery(e.target.value)}
                         />
                     </form>
+
+                    {/* Links to other pages */}
                     <ul className='navbar-nav ml-auto'>
                         <li className='nav-item'>
                         <NavLink className='nav-link' to='/about'>About</NavLink>
                         </li>
+
+                        {/* Determine which links to show if logged in/out */}
                         {user ? (
                             <>
                                 <li className='nav-item'>
@@ -112,6 +121,8 @@ const NavBar = (props) => {
                     </ul>
                 </div>
             </nav>
+
+            {/* Search Results */}
             <div className="d-flex container flex-wrap justify-content-around align-items-start overflow-auto" id="search-results">
                 {results ? results.map((result) => <ResultCard setActive={setActive} setResults={setResults} title={result.recipe.label} source={result.recipe.source} imageUrl={result.recipe.image} key={getRecipeId(result.recipe.uri)} edamam_id={getRecipeId(result.recipe.uri)} />) : null}
             </div>

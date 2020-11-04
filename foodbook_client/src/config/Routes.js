@@ -1,14 +1,17 @@
+/* imports */
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+
 import Home from '../pages/Home';
 import About from '../pages/About';
 import RecipeDetail from '../pages/RecipeDetail';
 import Profile from '../pages/Profile';
 import FoodbookDetail from '../pages/FoodbookDetail';
+import { loggedInState } from '../recoil/selectors';
 
-import { useRecoilValue } from "recoil";
-import { loggedInState } from "../recoil/selectors";
 
+/* Routes */
 const Routes = (props) => {
     const loggedIn = useRecoilValue(loggedInState);
     

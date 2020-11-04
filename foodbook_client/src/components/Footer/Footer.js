@@ -1,8 +1,11 @@
+/* imports */
 import React from 'react';
 import ScrollUpButton from 'react-scroll-up-button';
 
 import './Footer.css';
 
+
+/* Footer Component */
 const Footer = (props) => {
     return (
         <footer className="text-muted">

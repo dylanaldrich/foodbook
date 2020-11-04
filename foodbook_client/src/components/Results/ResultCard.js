@@ -1,8 +1,11 @@
+/* imports */
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 
 import './ResultCard.css';
 
+
+/* Result Card Component */
 const ResultCard = ({title, source, imageUrl, edamam_id, setActive, setResults}) => {
     return(
         <div className="col-3">

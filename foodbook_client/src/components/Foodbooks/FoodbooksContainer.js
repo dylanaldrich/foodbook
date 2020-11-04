@@ -1,6 +1,10 @@
+/* imports */
 import React from 'react';
+
 import FoodbookCard from './FoodbookCard';
 
+
+/* Foodbooks Container Component */
 const FoodbooksContainer = ({foodbooks, findProfile, profileId}) => {
     function generateFoodbookCards(foodbooks) {
         return foodbooks.map((foodbook) => {
