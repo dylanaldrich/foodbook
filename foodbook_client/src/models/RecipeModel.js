@@ -1,3 +1,4 @@
+/* Backend server URL */
 const URL = "http://localhost:3001/recipe";
 
 class RecipeModel {
@@ -41,7 +42,7 @@ class RecipeModel {
     };
 
 
-    // delete (this will ONLY get hit on a recipe edit form)
+    // delete
     static delete = (recipeId) => {
         return fetch(`${URL}/${recipeId}`, {
             method: "DELETE",
@@ -52,8 +53,9 @@ class RecipeModel {
         })
         .then(response => response.json());
     };
+    
 
-    // remove recipe from one foodbook
+    // remove (from one foodbook)
     static remove = (recipeId, foodbookId) => {
         return fetch(`${URL}/${recipeId}/${foodbookId}`, {
             method: "POST",

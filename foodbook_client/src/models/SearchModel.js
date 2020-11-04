@@ -1,3 +1,4 @@
+/* Backend server URL */
 const URL = "http://localhost:3001/search";
 
 class SearchModel {
@@ -5,6 +6,7 @@ class SearchModel {
     static searchRecipes = (query) => {
         return fetch(`${URL}/${query}`).then(response => response.json());
     };
+
 
     // find one recipe
     static searchOneRecipe = (edamam_id) => {

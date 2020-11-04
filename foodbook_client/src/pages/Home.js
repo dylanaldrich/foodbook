@@ -1,10 +1,14 @@
+/* imports */
 import React from 'react';
 
 import '../App.css';
 
+
+/* Home Page Component */
 const Home = (props) => {
     return (
         <>
+            {/* Banner */}
             <div className='jumbotron jumbotron-fluid'>
                 <div className='container justify-content-start'>
                     <h1 className='display-4 text-left pt-2'>Welcome to foodbook!</h1>
@@ -12,6 +16,8 @@ const Home = (props) => {
                     <h3 className='text-left pb-2'>We're so glad you're here! Ready to get cooking?</h3>
                 </div>
             </div>
+
+            {/* Instructions */}
             <div className='container justify-content-start'>
                 <div class='row featurette align-items-center'>
                     <div class='col-md-3'>

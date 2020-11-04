@@ -1,3 +1,4 @@
+/* Backend server URL */
 const URL = "http://localhost:3001/foodbooks";
 
 class FoodbookModel {

@@ -1,3 +1,4 @@
+/* Backend server URL */
 const URL = "http://localhost:3001/user";
 
 class UserModel {
@@ -8,6 +9,7 @@ class UserModel {
             headers: {authorization: `Bearer ${localStorage.uid}`},
         }).then((response) => response.json());
     };
+    
 
     // update
     static update = (userData) => {

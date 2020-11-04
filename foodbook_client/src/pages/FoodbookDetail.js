@@ -1,3 +1,4 @@
+/* imports */
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
@@ -7,6 +8,8 @@ import RecipeModel from '../models/RecipeModel';
 
 import '../App.css';
 
+
+/* Foodbook Detail Page Component */
 const FoodbookDetail = (props) => {
     const [recipeFilter, setRecipeFilter] = useState("");
     const [foodbook, setFoodbook] = useState({});
@@ -66,81 +69,83 @@ const FoodbookDetail = (props) => {
         <>
         {foodbook.recipes && recipes ? 
             <>
-            {/* Banner */}
-            {error && <p style={{ color: "red" }}>{error}</p>}
-            <div className="container text-white rounded bg-dark d-flex align-items-center top-banner">
-                <div className="col-md-6 px-0">
-                    <h1 className="display-4 text-left">{foodbook.name}</h1>
+                {/* Banner */}
+                {error && <p style={{ color: "red" }}>{error}</p>}
+                <div className="container text-white rounded bg-dark d-flex align-items-center top-banner">
+                    <div className="col-md-6 px-0">
+                        <h1 className="display-4 text-left">{foodbook.name}</h1>
+                    </div>
+                    <div className="ml-auto">
+                        <ModalContainer triggerText={"Edit foodbook"} foodbookId={foodbook._id} />
+                    </div>
                 </div>
-                <div className="ml-auto">
-                    <ModalContainer triggerText={"Edit foodbook"} foodbookId={foodbook._id} />
-                </div>
-            </div>
-            {/* Banner End */}
-            <div className="page-header container ">
-                <div className="mx-0 row pt-3 align-items-start">
-                    {/* Recipe Type Filter */}
-                    <div className="col-md-auto mx-auto">
-                        <h4 className="pt-2">Recipe Types</h4>
-                        <div class="list-group mx-0">
-                            <button type="button" className="list-group-item list-group-item-action" onClick={() => {
-                                setRecipeFilter("");
-                                setRecipes(foodbook.recipes);
-                                }}>All
-                            </button>
-                            <button type="button" className="list-group-item list-group-item-action" onClick={() => {
-                                setRecipes(foodbook.recipes);
-                                setRecipeFilter("appetizer");
-                                }}>Appetizers
-                            </button>
-                            <button type="button" className="list-group-item list-group-item-action" onClick={() => {
-                                setRecipes(foodbook.recipes);
-                                setRecipeFilter("entree");
-                                }}>Entrées
-                            </button>
-                            <button type="button" className="list-group-item list-group-item-action" onClick={() => {
-                                setRecipes(foodbook.recipes);
-                                setRecipeFilter("side");
-                                }}>Side
-                            </button>
-                            <button type="button" className="list-group-item list-group-item-action" onClick={() => {
-                                setRecipes(foodbook.recipes);
-                                setRecipeFilter("salad");
-                                }}>Salads
-                            </button>
-                            <button type="button" className="list-group-item list-group-item-action" onClick={() => {
-                                setRecipes(foodbook.recipes);
-                                setRecipeFilter("dessert");
-                                }}>Desserts
-                            </button>
-                            <button type="button" className="list-group-item list-group-item-action" onClick={() => {
-                                setRecipes(foodbook.recipes);
-                                setRecipeFilter("drink");
-                                }}>Drinks
-                            </button>
+                
+                {/* Foodbook details */}
+                <div className="page-header container ">
+                    <div className="mx-0 row pt-3 align-items-start">
+                        {/* Recipe Type Filter */}
+                        <div className="col-md-auto mx-auto">
+                            <h4 className="pt-2">Recipe Types</h4>
+                            <div class="list-group mx-0">
+                                <button type="button" className="list-group-item list-group-item-action" onClick={() => {
+                                    setRecipeFilter("");
+                                    setRecipes(foodbook.recipes);
+                                    }}>All
+                                </button>
+                                <button type="button" className="list-group-item list-group-item-action" onClick={() => {
+                                    setRecipes(foodbook.recipes);
+                                    setRecipeFilter("appetizer");
+                                    }}>Appetizers
+                                </button>
+                                <button type="button" className="list-group-item list-group-item-action" onClick={() => {
+                                    setRecipes(foodbook.recipes);
+                                    setRecipeFilter("entree");
+                                    }}>Entrées
+                                </button>
+                                <button type="button" className="list-group-item list-group-item-action" onClick={() => {
+                                    setRecipes(foodbook.recipes);
+                                    setRecipeFilter("side");
+                                    }}>Side
+                                </button>
+                                <button type="button" className="list-group-item list-group-item-action" onClick={() => {
+                                    setRecipes(foodbook.recipes);
+                                    setRecipeFilter("salad");
+                                    }}>Salads
+                                </button>
+                                <button type="button" className="list-group-item list-group-item-action" onClick={() => {
+                                    setRecipes(foodbook.recipes);
+                                    setRecipeFilter("dessert");
+                                    }}>Desserts
+                                </button>
+                                <button type="button" className="list-group-item list-group-item-action" onClick={() => {
+                                    setRecipes(foodbook.recipes);
+                                    setRecipeFilter("drink");
+                                    }}>Drinks
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Recipes List */}
+                        <div className="col">
+                            <h2 className="text-left pt-2 font-weight-bold">Recipes</h2>
+                            <hr />
+                            <ul className="list-group list-group-flush">
+                                {recipes ? recipes.map((recipe) => 
+                                    <li className="list-group-item d-flex" key={recipe._id}>
+                                        <Link to={`/recipe/${recipe.edamam_id}`}>
+                                            {recipe.name ? recipe.name : "Mysterious Nameless Recipe"}
+                                        </Link>
+                                        <p className="ml-3 mr-auto text-muted font-italic">{recipe.recipe_type}</p>
+                                        {/* Remove button */}
+                                        <div onClick={() => handleRecipeRemove(recipe._id)} title="Remove this recipe"><i className="fas fa-times-circle"></i></div>
+                                    </li>
+                                    )
+                                : null}
+                                {recipes.length === 0 ? displayPrompt() : null}
+                            </ul>
                         </div>
                     </div>
-
-                    {/* Recipes List */}
-                    <div className="col">
-                        <h2 className="text-left pt-2 font-weight-bold">Recipes</h2>
-                        <hr />
-                        <ul className="list-group list-group-flush">
-                            {recipes ? recipes.map((recipe) => 
-                                <li className="list-group-item d-flex" key={recipe._id}>
-                                    <Link to={`/recipe/${recipe.edamam_id}`}>
-                                        {recipe.name ? recipe.name : "Mysterious Nameless Recipe"}
-                                    </Link>
-                                    <p className="ml-3 mr-auto text-muted font-italic">{recipe.recipe_type}</p>
-                                    <div onClick={() => handleRecipeRemove(recipe._id)} title="Remove this recipe"><i className="fas fa-times-circle"></i></div>
-                                </li>
-                                )
-                            : null}
-                            {recipes.length === 0 ? displayPrompt() : null}
-                        </ul>
-                    </div>
                 </div>
-            </div>
             </>
             : <p>Loading...</p> }
         </>

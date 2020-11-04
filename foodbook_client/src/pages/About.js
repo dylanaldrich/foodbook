@@ -1,7 +1,9 @@
+/* imports */
 import React from 'react';
 
 import '../App.css';
 
+/* About Page Component */
 const About = (props) => {
     return (
         <>
