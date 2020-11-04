@@ -61,6 +61,7 @@ const NavBar = (props) => {
     return (
         <div className={`navbar ${active ? "navbar-active overflow-auto" : ""}`}>
             <nav class='navbar navbar-expand-md navbar-dark fixed-top bg-dark d-flex'>
+                <img className="mr-1" src="https://i.ibb.co/YP9SC9N/foodbook-favicon.png" alt="foodbook-logo" height="55"/>
                 <NavLink className='navbar-brand navbar__titles' to='/'>foodbook</NavLink>
                 <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarCollapse' aria-controls='navbarCollapse' aria-expanded='false' aria-label='Toggle navigation'>
                 <span className='navbar-toggler-icon'></span>
@@ -107,7 +108,7 @@ const NavBar = (props) => {
                     </ul>
                 </div>
             </nav>
-            <div className="d-flex flex-wrap justify-content-around overflow-auto" id="search-results">
+            <div className="d-flex mx-auto flex-wrap justify-content-around overflow-auto" id="search-results">
                 {results ? results.map((result) => <ResultCard setActive={setActive} setResults={setResults} title={result.recipe.label} source={result.recipe.source} imageUrl={result.recipe.image} key={getRecipeId(result.recipe.uri)} edamam_id={getRecipeId(result.recipe.uri)} />) : null}
             </div>
         </div>

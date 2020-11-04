@@ -1,6 +1,5 @@
-/* TODO refactor for EDIT RECIPE */
-
 import React, {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
 
 import RecipeModel from '../../models/RecipeModel';
 import UserModel from '../../models/UserModel';
@@ -14,7 +13,9 @@ export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, s
     const [user, setUser] = useRecoilState(userState);
     const [selectedFoodbooks, setSelectedFoodbooks] = useState([]);
     const [preSelectedFoodbooks, setPreSelectedFoodbooks] = useState([]);
+    // const [preChecked, setPreChecked] = useState(true);
     const [error, setError] = useState('');
+    let history = useHistory();
 
     useEffect(function () {
         if(localStorage.getItem('uid')) {
@@ -27,6 +28,10 @@ export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, s
             });
         }
     }, []);
+
+    // useEffect(function() {
+
+    // })
 
     useEffect(function() {
         if(preSelectedFoodbooks) {
@@ -48,7 +53,7 @@ export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, s
 
     function handleSubmit(event) {
         event.preventDefault();
-        RecipeModel.update({recipe_type, foodbooksIds: selectedFoodbooks, name: recipeName, edamam_id}).then((response) => {
+        RecipeModel.update(savedRecipeId, {recipe_type, foodbooksIds: selectedFoodbooks, name: recipeName, edamam_id}).then((response) => {
         console.log("Create recipe response:", response);
         if(response.status === 201) {
             console.log("Recipe created successfully");
@@ -59,8 +64,19 @@ export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, s
         });
     };
 
+    function deleteRecipe() {
+        RecipeModel.delete(savedRecipeId)
+        .then(response => {
+            closeModal();
+            history.push(`/profile/${user._id}`);
+        });
+    };
+
     function handleChange(e) {
-        console.log("e.target.type, name, value:", e.target.type, e.target.name, e.target.value);
+        console.log("e.target.checked:", e.target.checked);
+        if(e.target.defaultChecked || !e.target.defaultChecked) {
+            e.target.defaultChecked = !e.target.defaultChecked
+        }
         if(selectedFoodbooks.includes(e.target.value)) {
             setSelectedFoodbooks(selectedFoodbooks.filter(foodbook => {
                 return foodbook !== e.target.value;
@@ -71,12 +87,12 @@ export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, s
     }
 
     const generateCheckbox = allFoodbooks && preSelectedFoodbooks ? allFoodbooks.map((foodbook) => {
-        // Handle the logic if foodbook is in selectedFoodbooks array, return a checked checkbox, else uncheck
+        // Handle the logic if foodbook is in selectedFoodbooks array, return a checked checkbox, else unchecked
         if(preSelectedFoodbooks.some(index => index === foodbook._id)) {
             selectedFoodbooks.concat([foodbook._id]);
             return <li className="mx-auto">
                 <label htmlFor="name">{foodbook.name}</label> 
-                <input type="checkbox" checked onChange={handleChange}  className="ml-2" name={`foodbook_${foodbook._id}`} value={foodbook._id} key={foodbook._id} />
+                <input type="checkbox" defaultChecked={true} onChange={handleChange}  className="ml-2" name={`foodbook_${foodbook._id}`} value={foodbook._id} key={foodbook._id} />
             </li>;
         }
 
@@ -99,6 +115,7 @@ export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, s
     }
 
     return (
+        <>
         <form onSubmit={handleSubmit}>
             {error && <p style={{ color: "red" }}>{error}</p>} 
             <div className="form-group text-center">
@@ -129,6 +146,10 @@ export const EditRecipeForm = ({closeModal, recipeName, edamam_id, recipeType, s
                 </button>
             </div>
         </form>
+        <div className="form-group">
+            <button className="form-control btn btn-danger" onClick={deleteRecipe}>Delete Recipe</button>
+        </div>
+        </>
     );
 };
 

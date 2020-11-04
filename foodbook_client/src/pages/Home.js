@@ -15,7 +15,7 @@ const Home = (props) => {
             <div className='container justify-content-start'>
                 <div class='row featurette align-items-center'>
                     <div class='col-md-3'>
-                        <svg class='bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto mt-4' width='250' height='250' xmlns='http://www.w3.org/2500/svg' preserveAspectRatio='xMidYMid slice' focusable='false' role='img' aria-label='Placeholder: 250x250'><title>Placeholder</title><rect width='100%' height='100%' fill='#eee'></rect><text x='50%' y='50%' fill='#aaa' dy='.3em'>250x250</text></svg>
+                        <img class='bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto mt-4' width='250' src='https://i.ibb.co/GvGQHtw/foodbook-search.png' alt="Search image"></img>
                     </div>
                     <div class='col-md-8 text-left'>
                         <h2 class='featurette-heading'>Step 1: Search for a recipe thats interests you.</h2>
@@ -24,7 +24,7 @@ const Home = (props) => {
                 </div>
                 <div class='row featurette align-items-center'>
                     <div class='col-md-3'>
-                        <svg class='bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto mt-4' width='250' height='250' xmlns='http://www.w3.org/2500/svg' preserveAspectRatio='xMidYMid slice' focusable='false' role='img' aria-label='Placeholder: 250x250'><title>Placeholder</title><rect width='100%' height='100%' fill='#eee'></rect><text x='50%' y='50%' fill='#aaa' dy='.3em'>250x250</text></svg>
+                        <img class='bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto mt-4' width='250' src='https://i.ibb.co/TK0FF6y/foodbook-recipesave.png' alt="Recipe save image"></img>
                     </div>
                     <div class='col-md-8 text-left'>
                         <h2 class='featurette-heading'>Step 2: Do you want to save a recipe and try it out?</h2>
@@ -33,7 +33,7 @@ const Home = (props) => {
                 </div>
                 <div class='row featurette align-items-center'>
                     <div class='col-md-3'>
-                        <svg class='bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto mt-4' width='250' height='250' xmlns='http://www.w3.org/2500/svg' preserveAspectRatio='xMidYMid slice' focusable='false' role='img' aria-label='Placeholder: 250x250'><title>Placeholder</title><rect width='100%' height='100%' fill='#eee'></rect><text x='50%' y='50%' fill='#aaa' dy='.3em'>250x250</text></svg>
+                        <img class='bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto mt-4' width='250' src='https://i.ibb.co/Jz7V8Sk/foodbook-create.png' alt="Foodbook create image"></img>
                     </div>
                     <div class='col-md-8 text-left'>
                         <h2 class='featurette-heading'>Step 3: Need to create a foodbook?</h2>

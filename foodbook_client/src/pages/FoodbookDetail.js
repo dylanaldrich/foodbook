@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
+
 import ModalContainer from '../components/Modal/ModalContainer';
 import FoodbookModel from '../models/FoodbookModel';
 import RecipeModel from '../models/RecipeModel';
@@ -22,14 +23,14 @@ const FoodbookDetail = (props) => {
         [props.match.params.id]
     );
 
+
     // watches for change in recipe filter to invoke recipe filter method
     useEffect(async () => {
-        console.log("filter by: ", recipeFilter);
         await setRecipes(foodbook.recipes);
-        console.log("recipes when useeffect hits:", recipes);
         if(recipeFilter !== "") return handleRecipeFilter();
     }, [recipeFilter]);
 
+    // fetches foodbook and sets state
     function findFoodbook (foodbookId) {
         FoodbookModel.show(foodbookId)
         .then(async (response) => {
@@ -43,21 +44,27 @@ const FoodbookDetail = (props) => {
         });
     };
 
+    // removes a recipe from current category
     function handleRecipeRemove(recipeId) {
         RecipeModel.remove(recipeId, foodbook._id)
             .catch((error) => console.log("Recipe remove error: ", error));
     };
 
+    // filters recipes by type
     async function handleRecipeFilter() {
-        console.log("recipes before filter:", recipes);
         const filteredRecipes = recipes.filter(recipe => recipe.recipe_type === recipeFilter);
         await setRecipes(filteredRecipes);
-        console.log("recipes after filter:", recipes);
     }
+
+    // displays a prompt if no recipes exist
+    function displayPrompt () {
+        if(recipes.length === 0) return <p className="list-group-item text-muted bg-dark">Nothing to see here! Search for some recipes and add them in!</p>;
+    };
+
 
     return (
         <>
-        {foodbook.recipes ? 
+        {foodbook.recipes && recipes ? 
             <>
             {/* Banner */}
             {error && <p style={{ color: "red" }}>{error}</p>}
@@ -76,16 +83,41 @@ const FoodbookDetail = (props) => {
                     <div className="col-md-auto mx-auto">
                         <h4 className="pt-2">Recipe Types</h4>
                         <div class="list-group mx-0">
-                            <div className="list-group-item list-group-item-action" onClick={() => {
+                            <button type="button" className="list-group-item list-group-item-action" onClick={() => {
                                 setRecipeFilter("");
                                 setRecipes(foodbook.recipes);
-                                }}>All</div>
-                            <div className="list-group-item list-group-item-action" onClick={() => setRecipeFilter("appetizer")}>Appetizers</div>
-                            <div className="list-group-item list-group-item-action" onClick={() => setRecipeFilter("entree")}>Entrées</div>
-                            <div className="list-group-item list-group-item-action" onClick={() => setRecipeFilter("side")}>Sides</div>
-                            <div className="list-group-item list-group-item-action" onClick={() => setRecipeFilter("salad")}>Salads</div>
-                            <div className="list-group-item list-group-item-action" onClick={() => setRecipeFilter("dessert")}>Desserts</div>
-                            <div className="list-group-item list-group-item-action" onClick={() => setRecipeFilter("drink")}>Drinks</div>
+                                }}>All
+                            </button>
+                            <button type="button" className="list-group-item list-group-item-action" onClick={() => {
+                                setRecipes(foodbook.recipes);
+                                setRecipeFilter("appetizer");
+                                }}>Appetizers
+                            </button>
+                            <button type="button" className="list-group-item list-group-item-action" onClick={() => {
+                                setRecipes(foodbook.recipes);
+                                setRecipeFilter("entree");
+                                }}>Entrées
+                            </button>
+                            <button type="button" className="list-group-item list-group-item-action" onClick={() => {
+                                setRecipes(foodbook.recipes);
+                                setRecipeFilter("side");
+                                }}>Side
+                            </button>
+                            <button type="button" className="list-group-item list-group-item-action" onClick={() => {
+                                setRecipes(foodbook.recipes);
+                                setRecipeFilter("salad");
+                                }}>Salads
+                            </button>
+                            <button type="button" className="list-group-item list-group-item-action" onClick={() => {
+                                setRecipes(foodbook.recipes);
+                                setRecipeFilter("dessert");
+                                }}>Desserts
+                            </button>
+                            <button type="button" className="list-group-item list-group-item-action" onClick={() => {
+                                setRecipes(foodbook.recipes);
+                                setRecipeFilter("drink");
+                                }}>Drinks
+                            </button>
                         </div>
                     </div>
 
@@ -103,7 +135,8 @@ const FoodbookDetail = (props) => {
                                     <div onClick={() => handleRecipeRemove(recipe._id)} title="Remove this recipe"><i className="fas fa-times-circle"></i></div>
                                 </li>
                                 )
-                            : <li className="list-group-item text-muted">Nothing to see here! Search for some recipes and add them in!</li>}
+                            : null}
+                            {recipes.length === 0 ? displayPrompt() : null}
                         </ul>
                     </div>
                 </div>

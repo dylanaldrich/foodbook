@@ -1,13 +1,29 @@
 import React, {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
+
 import FoodbookModel from '../../models/FoodbookModel';
+import UserModel from '../../models/UserModel';
+
+import { useRecoilState } from "recoil";
+import { userState } from "../../recoil/atoms";
 
 export const EditFoodbookForm = ({foodbookId ,closeModal}) => {
     const [name, setName] = useState("");
     const [foodbook, setFoodbook] = useState({});
     const [error, setError] = useState('');
+    const [user, setUser] = useRecoilState(userState);
+    let history = useHistory();
 
     useEffect(() => {
         fetchFoodbook(foodbookId);
+    }, []);
+
+    useEffect(function () {
+        if(localStorage.getItem('uid')) {
+            UserModel.show().then((response) => {
+                setUser(response.data);
+            });
+        }
     }, []);
     
     function fetchFoodbook(foodbookId) {
@@ -30,8 +46,17 @@ export const EditFoodbookForm = ({foodbookId ,closeModal}) => {
             }
         });
     };
+
+    function deleteFoodbook() {
+        FoodbookModel.delete(foodbookId)
+        .then(response => {
+            closeModal();
+            history.push(`/profile/${user._id}`);
+        });
+    };
     
     return (
+        <>
         <form onSubmit={handleSubmit}>
             {/* {fetchFoodbook(foodbookId)} */}
             {error && <p style={{ color: "red" }}>{error}</p>} 
@@ -50,6 +75,10 @@ export const EditFoodbookForm = ({foodbookId ,closeModal}) => {
                 <button className="form-control btn btn-primary" type="submit">Submit</button>
             </div>
         </form>
+        <div className="form-group">
+            <button className="form-control btn btn-danger" onClick={deleteFoodbook}>Delete Foodbook</button>
+        </div>
+        </>
     );
 };
 

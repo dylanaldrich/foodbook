@@ -55,6 +55,7 @@ const RecipeDetail = (props) => {
     function findOneRecipe (recipe_id) {
         SearchModel.searchOneRecipe(recipe_id)
         .then((response) => {
+            console.log("response", response);
             const foundRecipe = response.searchResults.hits[0].recipe;
             setRecipe(foundRecipe);
         })
@@ -106,7 +107,7 @@ const RecipeDetail = (props) => {
                             recipeName={recipe.label} 
                             edamam_id={props.match.params.id} 
                             findOneRecipe={findOneRecipe} 
-                            currentRecipeId={props.match.params.id} 
+                            currentRecipeId={props.match.params.id}
                             /> 
                         }
                     </div>

@@ -47,10 +47,7 @@ hr {
   border-radius: 10px;
 }
 
-.jumpbotron {
-  margin: 0 auto;
-  padding: 65px 0 0 0;
-}
+
 
 @media screen and (min-width: 576px) {
   .jumbotron {
@@ -191,4 +188,10 @@ footer {
 
 .foodbook-card:hover {
   transform: scale(1.1);
+}
+
+.jumbotron {
+  margin: 0 auto;
+  padding: 65px 0 0 0;
+  background-color: rgb(23,162,184);
 }
