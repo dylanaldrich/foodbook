@@ -97,10 +97,10 @@ const NavBar = (props) => {
                             </>
                         ) : (
                             <>
-                                <li className='nav-item nav-button'>
+                                <li className='nav-item'>
                                     <ModalContainer triggerText={"Login"} />
                                 </li>
-                                <li className='nav-item nav-button col'>
+                                <li className='nav-item'>
                                     <ModalContainer triggerText={"Sign Up"} />
                                 </li>
                             </>
@@ -108,7 +108,7 @@ const NavBar = (props) => {
                     </ul>
                 </div>
             </nav>
-            <div className="d-flex mx-auto flex-wrap justify-content-around overflow-auto" id="search-results">
+            <div className="d-flex container flex-wrap justify-content-around overflow-auto" id="search-results">
                 {results ? results.map((result) => <ResultCard setActive={setActive} setResults={setResults} title={result.recipe.label} source={result.recipe.source} imageUrl={result.recipe.image} key={getRecipeId(result.recipe.uri)} edamam_id={getRecipeId(result.recipe.uri)} />) : null}
             </div>
         </div>

@@ -37,7 +37,7 @@ const Home = (props) => {
                     </div>
                     <div class='col-md-8 text-left'>
                         <h2 class='featurette-heading'>Step 3: Need to create a foodbook?</h2>
-                        <p class='lead'>Your foodbooks are where you store recipes. You can create any kind of foodbook you like: Mexican, Weeknight Meals, Vegetarian, Christmas, etc. To create one, just complete the short form on your profile page and you're ready to go!</p>
+                        <p class='lead'>Your foodbooks are where you store recipes. You can create any kind of foodbook you like, such as: Mexican Food, Weeknight Meals, Vegetarian, Holiday Favorites, etc. To create one, just complete the short form on your profile page and you're ready to go!</p>
                     </div>
                 </div>
             </div>

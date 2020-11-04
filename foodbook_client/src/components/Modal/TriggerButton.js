@@ -1,13 +1,20 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-const TriggerButton = ({ triggerText, buttonRef, showModal}) => {
-    // function setClassName(string) {
-    //     if(string === "Login" || string === "Sign Up") {
-    //         return "nav-item nav-link nav-button";
-    //     } 
-    //     return "btn btn-md btn-info center modal-button";
-    
-    // }
+import './TriggerButton.css';
+
+const TriggerButton = ({ triggerText, buttonRef, showModal}) => {    
+    if(triggerText === "Login" || triggerText === "Sign Up") {
+        return (
+            <div 
+            className={`nav-link ${triggerText === "Sign Up" ? "signup-link" : ""}`} 
+            ref={buttonRef}
+            onClick={showModal}
+            >
+                {triggerText}
+            </div>
+        );
+    };
     
     return (
         <button
